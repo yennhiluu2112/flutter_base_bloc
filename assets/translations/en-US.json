@@ -1,5 +1,17 @@
 {
     "Common": {
         "Welcome": "Welcome"
+    },
+    "Intro": {
+        "Title": [
+            "Play The Beat",
+            "Live The Life",
+            "Capture The Moment"
+        ],
+        "Subtitle": [
+            "Most beginner producers learn make creating by simple beats",
+            "In our daily lives, we often rush tasks trying to get them finish",
+            "You are not alone. You have unique ability to go to another"
+        ]
     }
 }
