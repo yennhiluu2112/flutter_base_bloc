@@ -15,14 +15,23 @@ class $AssetsIconsGen {
   /// File path: assets/icons/dev.jpeg
   AssetGenImage get dev => const AssetGenImage('assets/icons/dev.jpeg');
 
+  /// File path: assets/icons/error.png
+  AssetGenImage get error => const AssetGenImage('assets/icons/error.png');
+
+  /// File path: assets/icons/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/icons/logo.png');
+
   /// File path: assets/icons/prod.jpeg
   AssetGenImage get prod => const AssetGenImage('assets/icons/prod.jpeg');
 
   /// File path: assets/icons/stag.jpeg
   AssetGenImage get stag => const AssetGenImage('assets/icons/stag.jpeg');
 
+  /// File path: assets/icons/success.png
+  AssetGenImage get success => const AssetGenImage('assets/icons/success.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [dev, prod, stag];
+  List<AssetGenImage> get values => [dev, error, logo, prod, stag, success];
 }
 
 class $AssetsImagesGen {

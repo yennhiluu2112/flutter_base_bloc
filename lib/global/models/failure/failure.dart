@@ -5,7 +5,7 @@ part 'failure.freezed.dart';
 
 @freezed
 class Failure with _$Failure {
-  const factory Failure.unknown(Object data) = _unknownFailure;
+  const factory Failure.unknown() = _unknownFailure;
 
   const factory Failure.firebase(FirebaseException e) = _firebaseFailure;
 

@@ -59,6 +59,21 @@ class AppThemes {
           ),
         ),
       ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size(48, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          side: const BorderSide(
+            color: AppColors.primary600,
+          ),
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+        ),
+      ),
       textTheme: TextTheme(
         displayLarge: TextStyle(
           fontSize: 28,

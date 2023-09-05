@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Object data) unknown,
+    required TResult Function() unknown,
     required TResult Function(FirebaseException e) firebase,
     required TResult Function(Object data) illegalData,
     required TResult Function() network,
@@ -27,7 +27,7 @@ mixin _$Failure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Object data)? unknown,
+    TResult? Function()? unknown,
     TResult? Function(FirebaseException e)? firebase,
     TResult? Function(Object data)? illegalData,
     TResult? Function()? network,
@@ -36,7 +36,7 @@ mixin _$Failure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Object data)? unknown,
+    TResult Function()? unknown,
     TResult Function(FirebaseException e)? firebase,
     TResult Function(Object data)? illegalData,
     TResult Function()? network,
@@ -96,8 +96,6 @@ abstract class _$$_unknownFailureCopyWith<$Res> {
   factory _$$_unknownFailureCopyWith(
           _$_unknownFailure value, $Res Function(_$_unknownFailure) then) =
       __$$_unknownFailureCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Object data});
 }
 
 /// @nodoc
@@ -107,77 +105,55 @@ class __$$_unknownFailureCopyWithImpl<$Res>
   __$$_unknownFailureCopyWithImpl(
       _$_unknownFailure _value, $Res Function(_$_unknownFailure) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? data = null,
-  }) {
-    return _then(_$_unknownFailure(
-      null == data ? _value.data : data,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_unknownFailure implements _unknownFailure {
-  const _$_unknownFailure(this.data);
-
-  @override
-  final Object data;
+  const _$_unknownFailure();
 
   @override
   String toString() {
-    return 'Failure.unknown(data: $data)';
+    return 'Failure.unknown()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_unknownFailure &&
-            const DeepCollectionEquality().equals(other.data, data));
+        (other.runtimeType == runtimeType && other is _$_unknownFailure);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_unknownFailureCopyWith<_$_unknownFailure> get copyWith =>
-      __$$_unknownFailureCopyWithImpl<_$_unknownFailure>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Object data) unknown,
+    required TResult Function() unknown,
     required TResult Function(FirebaseException e) firebase,
     required TResult Function(Object data) illegalData,
     required TResult Function() network,
     required TResult Function(String message) other,
   }) {
-    return unknown(data);
+    return unknown();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Object data)? unknown,
+    TResult? Function()? unknown,
     TResult? Function(FirebaseException e)? firebase,
     TResult? Function(Object data)? illegalData,
     TResult? Function()? network,
     TResult? Function(String message)? other,
   }) {
-    return unknown?.call(data);
+    return unknown?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Object data)? unknown,
+    TResult Function()? unknown,
     TResult Function(FirebaseException e)? firebase,
     TResult Function(Object data)? illegalData,
     TResult Function()? network,
@@ -185,7 +161,7 @@ class _$_unknownFailure implements _unknownFailure {
     required TResult orElse(),
   }) {
     if (unknown != null) {
-      return unknown(data);
+      return unknown();
     }
     return orElse();
   }
@@ -232,12 +208,7 @@ class _$_unknownFailure implements _unknownFailure {
 }
 
 abstract class _unknownFailure implements Failure {
-  const factory _unknownFailure(final Object data) = _$_unknownFailure;
-
-  Object get data;
-  @JsonKey(ignore: true)
-  _$$_unknownFailureCopyWith<_$_unknownFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _unknownFailure() = _$_unknownFailure;
 }
 
 /// @nodoc
@@ -304,7 +275,7 @@ class _$_firebaseFailure implements _firebaseFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Object data) unknown,
+    required TResult Function() unknown,
     required TResult Function(FirebaseException e) firebase,
     required TResult Function(Object data) illegalData,
     required TResult Function() network,
@@ -316,7 +287,7 @@ class _$_firebaseFailure implements _firebaseFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Object data)? unknown,
+    TResult? Function()? unknown,
     TResult? Function(FirebaseException e)? firebase,
     TResult? Function(Object data)? illegalData,
     TResult? Function()? network,
@@ -328,7 +299,7 @@ class _$_firebaseFailure implements _firebaseFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Object data)? unknown,
+    TResult Function()? unknown,
     TResult Function(FirebaseException e)? firebase,
     TResult Function(Object data)? illegalData,
     TResult Function()? network,
@@ -455,7 +426,7 @@ class _$_illegalDataFailure implements _illegalDataFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Object data) unknown,
+    required TResult Function() unknown,
     required TResult Function(FirebaseException e) firebase,
     required TResult Function(Object data) illegalData,
     required TResult Function() network,
@@ -467,7 +438,7 @@ class _$_illegalDataFailure implements _illegalDataFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Object data)? unknown,
+    TResult? Function()? unknown,
     TResult? Function(FirebaseException e)? firebase,
     TResult? Function(Object data)? illegalData,
     TResult? Function()? network,
@@ -479,7 +450,7 @@ class _$_illegalDataFailure implements _illegalDataFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Object data)? unknown,
+    TResult Function()? unknown,
     TResult Function(FirebaseException e)? firebase,
     TResult Function(Object data)? illegalData,
     TResult Function()? network,
@@ -580,7 +551,7 @@ class _$_networkFailure implements _networkFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Object data) unknown,
+    required TResult Function() unknown,
     required TResult Function(FirebaseException e) firebase,
     required TResult Function(Object data) illegalData,
     required TResult Function() network,
@@ -592,7 +563,7 @@ class _$_networkFailure implements _networkFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Object data)? unknown,
+    TResult? Function()? unknown,
     TResult? Function(FirebaseException e)? firebase,
     TResult? Function(Object data)? illegalData,
     TResult? Function()? network,
@@ -604,7 +575,7 @@ class _$_networkFailure implements _networkFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Object data)? unknown,
+    TResult Function()? unknown,
     TResult Function(FirebaseException e)? firebase,
     TResult Function(Object data)? illegalData,
     TResult Function()? network,
@@ -726,7 +697,7 @@ class _$_otherFailure implements _otherFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Object data) unknown,
+    required TResult Function() unknown,
     required TResult Function(FirebaseException e) firebase,
     required TResult Function(Object data) illegalData,
     required TResult Function() network,
@@ -738,7 +709,7 @@ class _$_otherFailure implements _otherFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Object data)? unknown,
+    TResult? Function()? unknown,
     TResult? Function(FirebaseException e)? firebase,
     TResult? Function(Object data)? illegalData,
     TResult? Function()? network,
@@ -750,7 +721,7 @@ class _$_otherFailure implements _otherFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Object data)? unknown,
+    TResult Function()? unknown,
     TResult Function(FirebaseException e)? firebase,
     TResult Function(Object data)? illegalData,
     TResult Function()? network,

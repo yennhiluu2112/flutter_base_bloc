@@ -11,6 +11,7 @@ void buildFlavor(String flavor) async {
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await setupLocator();
+  configureDependencies();
   runApp(
     MultiProvider(
       providers: [

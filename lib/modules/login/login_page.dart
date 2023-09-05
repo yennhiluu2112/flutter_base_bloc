@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text('Login'),
             ),
             const SizedBox(height: 18),
-            ElevatedButton(
+            OutlinedButton(
               onPressed: () {
                 context.router.push(const SignUpRoute());
               },

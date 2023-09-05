@@ -12,6 +12,9 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
+import '../../modules/sign_up/bloc/sign_up_bloc.dart' as _i7;
+import '../../services/repositories/auth/auth_repository.dart' as _i5;
+import '../../services/repositories/auth/auth_repository_impl.dart' as _i6;
 import '../../services/source/auth/auth_data_source.dart' as _i3;
 import '../../services/source/auth/auth_data_source_impl.dart' as _i4;
 
@@ -27,5 +30,8 @@ _i1.GetIt $initGetIt(
     environmentFilter,
   );
   gh.factory<_i3.AuthRemoteDataSource>(() => _i4.AuthRemoteDataSourceImpl());
+  gh.factory<_i5.AuthRepository>(
+      () => _i6.AuthRepositoryImpl(gh<_i3.AuthRemoteDataSource>()));
+  gh.factory<_i7.SignUpBloc>(() => _i7.SignUpBloc(gh<_i5.AuthRepository>()));
   return getIt;
 }
