@@ -38,4 +38,16 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(const Failure.unknown());
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> signOut() async {
+    try {
+      await _remoteDataSource.signOut();
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(Failure.firebase(e));
+    } catch (e) {
+      return left(const Failure.unknown());
+    }
+  }
 }

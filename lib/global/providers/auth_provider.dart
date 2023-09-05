@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 import '../../services/hive_service.dart';
 import '../di/di_setup.dart';
 import '../models/user_credentials/user_credentials.dart';
-import '../utils/constants.dart';
 
 class AuthProvider extends ChangeNotifier {
   AuthProvider() {
@@ -26,7 +24,7 @@ class AuthProvider extends ChangeNotifier {
   Future logout() async {
     await _hiveService.saveUserCredential(UserCredentials());
     _credentials = _hiveService.getUserCredential();
-    Hive.box(Constants.hiveUserCredentialsKey).clear();
+
     notifyListeners();
   }
 }

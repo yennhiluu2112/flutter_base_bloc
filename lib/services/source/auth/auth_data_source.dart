@@ -5,4 +5,5 @@ import 'package:flutter_base_firebase/global/models/request/sign_up_request/sign
 abstract class AuthRemoteDataSource {
   Future<UserCredential> signUp(SignUpRequest signUpRequestBody);
   Future<UserCredential> login(LoginRequest loginRequestBody);
+  Future<void> signOut();
 }

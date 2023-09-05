@@ -7,7 +7,9 @@ import '../../../global/models/failure/failure.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, UserCredential>> signUp(
-      SignUpRequest signUpRequestBody);
+    SignUpRequest signUpRequestBody,
+  );
 
   Future<Either<Failure, UserCredential>> login(LoginRequest loginRequestBody);
+  Future<Either<Failure, void>> signOut();
 }

@@ -28,4 +28,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
     return user;
   }
+
+  @override
+  Future<void> signOut() async {
+    await auth.signOut();
+  }
 }
