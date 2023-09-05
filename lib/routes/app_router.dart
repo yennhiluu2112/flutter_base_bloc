@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_base_firebase/modules/intro/intro_page.dart';
 
 import '../modules/login/login_page.dart';
+import '../modules/main/main_page.dart';
 import '../modules/sign_up/sign_up_page.dart';
 import '../modules/splash/splash_page.dart';
 
@@ -16,6 +17,7 @@ class AppRouter extends _$AppRouter {
       AutoRoute(page: IntroRoute.page),
       AutoRoute(page: LoginRoute.page),
       AutoRoute(page: SignUpRoute.page),
+      AutoRoute(page: MainRoute.page),
     ];
   }
 }

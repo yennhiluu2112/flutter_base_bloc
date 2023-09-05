@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/gen/assets.gen.dart';
+import 'package:flutter_base_firebase/global/providers/auth_provider.dart';
 import 'package:flutter_base_firebase/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,8 +21,15 @@ class _SplashPageState extends State<SplashPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(milliseconds: 1000), () {
         final appSettings = context.read<AppSettingsProvider>().appSettings;
+        final isAuth = context.read<AuthProvider>().isAuth;
+
+        print(appSettings.isFirstLaunch);
+        print(isAuth);
+
         if (appSettings.isFirstLaunch) {
           context.router.replaceAll([const IntroRoute()]);
+        } else if (isAuth) {
+          context.router.replaceAll([const MainRoute()]);
         } else {
           context.router.replaceAll([const LoginRoute()]);
         }

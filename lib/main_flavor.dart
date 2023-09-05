@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/app.dart';
 import 'package:flutter_base_firebase/global/di/di_setup.dart';
 import 'package:flutter_base_firebase/global/providers/app_settings_provider.dart';
+import 'package:flutter_base_firebase/global/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 void buildFlavor(String flavor) async {
@@ -16,6 +17,7 @@ void buildFlavor(String flavor) async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppSettingsProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: EasyLocalization(
         path: 'assets/translations',
