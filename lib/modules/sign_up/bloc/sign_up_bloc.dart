@@ -14,11 +14,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final AuthRepository _authRepository;
 
   SignUpBloc(this._authRepository) : super(const SignUpState()) {
-    on<SignUpEvent>((SignUpEvent event, Emitter<SignUpState> emit) async {
-      await event.when(
-        signUp: (body) => _signUp(emit, body),
-      );
-    });
+    on<SignUpEvent>(
+      (SignUpEvent event, Emitter<SignUpState> emit) async {
+        await event.when(
+          signUp: (body) => _signUp(emit, body),
+        );
+      },
+    );
   }
 
   Future<void> _signUp(
