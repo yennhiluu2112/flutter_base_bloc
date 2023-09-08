@@ -6,6 +6,7 @@ import 'package:flutter_base_firebase/global/models/song/song.dart';
 import 'package:flutter_base_firebase/global/widgets/base_page.dart';
 import 'package:flutter_base_firebase/global/widgets/loading_overlay.dart';
 import 'package:flutter_base_firebase/modules/main/home/bloc/home_bloc.dart';
+import 'package:flutter_base_firebase/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../global/di/di_setup.dart';
@@ -91,40 +92,45 @@ class SongTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: CachedNetworkImage(
-            imageUrl: song.imageUrl ?? '',
-            width: 70,
-            height: 70,
-            fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        context.router.push(SongDetailRoute(id: song.id!));
+      },
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: CachedNetworkImage(
+              imageUrl: song.imageUrl ?? '',
+              width: 70,
+              height: 70,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                song.name ?? '',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  song.name ?? '',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              Text(
-                song.singer ?? '',
-                style: const TextStyle(),
-              ),
-            ],
+                Text(
+                  song.singer ?? '',
+                  style: const TextStyle(),
+                ),
+              ],
+            ),
           ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.keyboard_control),
-        )
-      ],
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.keyboard_control),
+          )
+        ],
+      ),
     );
   }
 }

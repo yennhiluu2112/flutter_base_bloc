@@ -57,5 +57,12 @@
 		<string>en</string>
 		<string>vi</string>
 	</array>
+	<!-- <key>NSMicrophoneUsageDescription</key>
+	<string>Please allow app to use the microphone</string> -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

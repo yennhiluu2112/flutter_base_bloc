@@ -15,6 +15,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../../modules/login/bloc/login_bloc.dart' as _i7;
 import '../../modules/main/home/bloc/home_bloc.dart' as _i14;
 import '../../modules/main/settings/bloc/settings_bloc.dart' as _i8;
+import '../../modules/main/song_detail/bloc/song_detail_bloc.dart' as _i15;
 import '../../modules/sign_up/bloc/sign_up_bloc.dart' as _i9;
 import '../../services/repositories/auth/auth_repository.dart' as _i5;
 import '../../services/repositories/auth/auth_repository_impl.dart' as _i6;
@@ -47,5 +48,7 @@ _i1.GetIt $initGetIt(
   gh.factory<_i12.SongRepository>(
       () => _i13.SongRepositoryImpl(gh<_i10.SongRemoteDataSource>()));
   gh.factory<_i14.HomeBloc>(() => _i14.HomeBloc(gh<_i12.SongRepository>()));
+  gh.factory<_i15.SongDetailBloc>(
+      () => _i15.SongDetailBloc(gh<_i12.SongRepository>()));
   return getIt;
 }

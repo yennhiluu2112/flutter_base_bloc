@@ -21,4 +21,14 @@ class SongRepositoryImpl implements SongRepository {
       return left(const Failure.unknown());
     }
   }
+
+  @override
+  Future<Either<Failure, Song>> getSingleSong(String id) async {
+    try {
+      final result = await _remoteDataSource.getSingleSong(id);
+      return right(result);
+    } catch (e) {
+      return left(const Failure.unknown());
+    }
+  }
 }

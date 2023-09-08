@@ -6,4 +6,5 @@ import '../../../global/models/song/song.dart';
 
 abstract class SongRepository {
   Either<Failure, CollectionReference<Song>> getSongRef();
+  Future<Either<Failure, Song>> getSingleSong(String id);
 }

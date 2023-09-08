@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/modules/intro/intro_page.dart';
 
 import '../modules/login/login_page.dart';
 import '../modules/main/home/home_page.dart';
 import '../modules/main/main_page.dart';
 import '../modules/main/settings/settings_page.dart';
+import '../modules/main/song_detail/song_detail_page.dart';
 import '../modules/sign_up/sign_up_page.dart';
 import '../modules/splash/splash_page.dart';
 
@@ -26,6 +28,7 @@ class AppRouter extends _$AppRouter {
           AutoRoute(page: SettingsRoute.page),
         ],
       ),
+      AutoRoute(page: SongDetailRoute.page),
     ];
   }
 }

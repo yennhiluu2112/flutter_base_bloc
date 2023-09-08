@@ -3,4 +3,5 @@ import 'package:flutter_base_firebase/global/models/song/song.dart';
 
 abstract class SongRemoteDataSource {
   CollectionReference<Song> getSongRef();
+  Future<Song> getSingleSong(String id);
 }

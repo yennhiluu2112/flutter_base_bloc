@@ -45,6 +45,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomePage(),
       );
     },
+    SongDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<SongDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SongDetailPage(
+          key: args.key,
+          id: args.id,
+        ),
+      );
+    },
     SignUpRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -128,6 +138,44 @@ class HomeRoute extends PageRouteInfo<void> {
   static const String name = 'HomeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SongDetailPage]
+class SongDetailRoute extends PageRouteInfo<SongDetailRouteArgs> {
+  SongDetailRoute({
+    Key? key,
+    required String id,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SongDetailRoute.name,
+          args: SongDetailRouteArgs(
+            key: key,
+            id: id,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SongDetailRoute';
+
+  static const PageInfo<SongDetailRouteArgs> page =
+      PageInfo<SongDetailRouteArgs>(name);
+}
+
+class SongDetailRouteArgs {
+  const SongDetailRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return 'SongDetailRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for
