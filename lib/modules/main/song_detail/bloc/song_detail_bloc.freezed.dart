@@ -19,9 +19,16 @@ mixin _$SongDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getSingleSong,
-    required TResult Function(String path) initAudioPlayer,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
     required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
     required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
     required TResult Function() disposeAudio,
     required TResult Function() pauseAudio,
     required TResult Function() stopAudio,
@@ -31,9 +38,15 @@ mixin _$SongDetailEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getSingleSong,
-    TResult? Function(String path)? initAudioPlayer,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
     TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
     TResult? Function()? disposeAudio,
     TResult? Function()? pauseAudio,
     TResult? Function()? stopAudio,
@@ -43,9 +56,15 @@ mixin _$SongDetailEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getSingleSong,
-    TResult Function(String path)? initAudioPlayer,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
     TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
     TResult Function()? disposeAudio,
     TResult Function()? pauseAudio,
     TResult Function()? stopAudio,
@@ -58,7 +77,17 @@ mixin _$SongDetailEvent {
     required TResult Function(_GetSingleSongEvent value) getSingleSong,
     required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
     required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
     required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
     required TResult Function(_DisposeAudioEvent value) disposeAudio,
     required TResult Function(_PauseAudioEvent value) pauseAudio,
     required TResult Function(_StopAudioEvent value) stopAudio,
@@ -70,7 +99,13 @@ mixin _$SongDetailEvent {
     TResult? Function(_GetSingleSongEvent value)? getSingleSong,
     TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult? Function(_DisposeAudioEvent value)? disposeAudio,
     TResult? Function(_PauseAudioEvent value)? pauseAudio,
     TResult? Function(_StopAudioEvent value)? stopAudio,
@@ -82,7 +117,13 @@ mixin _$SongDetailEvent {
     TResult Function(_GetSingleSongEvent value)? getSingleSong,
     TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult Function(_DisposeAudioEvent value)? disposeAudio,
     TResult Function(_PauseAudioEvent value)? pauseAudio,
     TResult Function(_StopAudioEvent value)? stopAudio,
@@ -176,9 +217,16 @@ class _$_GetSingleSongEvent implements _GetSingleSongEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getSingleSong,
-    required TResult Function(String path) initAudioPlayer,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
     required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
     required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
     required TResult Function() disposeAudio,
     required TResult Function() pauseAudio,
     required TResult Function() stopAudio,
@@ -191,9 +239,15 @@ class _$_GetSingleSongEvent implements _GetSingleSongEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getSingleSong,
-    TResult? Function(String path)? initAudioPlayer,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
     TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
     TResult? Function()? disposeAudio,
     TResult? Function()? pauseAudio,
     TResult? Function()? stopAudio,
@@ -206,9 +260,15 @@ class _$_GetSingleSongEvent implements _GetSingleSongEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getSingleSong,
-    TResult Function(String path)? initAudioPlayer,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
     TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
     TResult Function()? disposeAudio,
     TResult Function()? pauseAudio,
     TResult Function()? stopAudio,
@@ -227,7 +287,17 @@ class _$_GetSingleSongEvent implements _GetSingleSongEvent {
     required TResult Function(_GetSingleSongEvent value) getSingleSong,
     required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
     required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
     required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
     required TResult Function(_DisposeAudioEvent value) disposeAudio,
     required TResult Function(_PauseAudioEvent value) pauseAudio,
     required TResult Function(_StopAudioEvent value) stopAudio,
@@ -242,7 +312,13 @@ class _$_GetSingleSongEvent implements _GetSingleSongEvent {
     TResult? Function(_GetSingleSongEvent value)? getSingleSong,
     TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult? Function(_DisposeAudioEvent value)? disposeAudio,
     TResult? Function(_PauseAudioEvent value)? pauseAudio,
     TResult? Function(_StopAudioEvent value)? stopAudio,
@@ -257,7 +333,13 @@ class _$_GetSingleSongEvent implements _GetSingleSongEvent {
     TResult Function(_GetSingleSongEvent value)? getSingleSong,
     TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult Function(_DisposeAudioEvent value)? disposeAudio,
     TResult Function(_PauseAudioEvent value)? pauseAudio,
     TResult Function(_StopAudioEvent value)? stopAudio,
@@ -286,7 +368,7 @@ abstract class _$$_InitAudioPlayerEventCopyWith<$Res> {
           $Res Function(_$_InitAudioPlayerEvent) then) =
       __$$_InitAudioPlayerEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({String path});
+  $Res call({List<Song> songs, int initialIndex});
 }
 
 /// @nodoc
@@ -300,13 +382,18 @@ class __$$_InitAudioPlayerEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? path = null,
+    Object? songs = null,
+    Object? initialIndex = null,
   }) {
     return _then(_$_InitAudioPlayerEvent(
-      null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == songs
+          ? _value._songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as List<Song>,
+      null == initialIndex
+          ? _value.initialIndex
+          : initialIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -314,14 +401,23 @@ class __$$_InitAudioPlayerEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_InitAudioPlayerEvent implements _InitAudioPlayerEvent {
-  const _$_InitAudioPlayerEvent(this.path);
+  const _$_InitAudioPlayerEvent(final List<Song> songs, this.initialIndex)
+      : _songs = songs;
+
+  final List<Song> _songs;
+  @override
+  List<Song> get songs {
+    if (_songs is EqualUnmodifiableListView) return _songs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_songs);
+  }
 
   @override
-  final String path;
+  final int initialIndex;
 
   @override
   String toString() {
-    return 'SongDetailEvent.initAudioPlayer(path: $path)';
+    return 'SongDetailEvent.initAudioPlayer(songs: $songs, initialIndex: $initialIndex)';
   }
 
   @override
@@ -329,11 +425,14 @@ class _$_InitAudioPlayerEvent implements _InitAudioPlayerEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_InitAudioPlayerEvent &&
-            (identical(other.path, path) || other.path == path));
+            const DeepCollectionEquality().equals(other._songs, _songs) &&
+            (identical(other.initialIndex, initialIndex) ||
+                other.initialIndex == initialIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, path);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_songs), initialIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -346,39 +445,58 @@ class _$_InitAudioPlayerEvent implements _InitAudioPlayerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getSingleSong,
-    required TResult Function(String path) initAudioPlayer,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
     required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
     required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
     required TResult Function() disposeAudio,
     required TResult Function() pauseAudio,
     required TResult Function() stopAudio,
     required TResult Function() closeBloc,
   }) {
-    return initAudioPlayer(path);
+    return initAudioPlayer(songs, initialIndex);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getSingleSong,
-    TResult? Function(String path)? initAudioPlayer,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
     TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
     TResult? Function()? disposeAudio,
     TResult? Function()? pauseAudio,
     TResult? Function()? stopAudio,
     TResult? Function()? closeBloc,
   }) {
-    return initAudioPlayer?.call(path);
+    return initAudioPlayer?.call(songs, initialIndex);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getSingleSong,
-    TResult Function(String path)? initAudioPlayer,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
     TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
     TResult Function()? disposeAudio,
     TResult Function()? pauseAudio,
     TResult Function()? stopAudio,
@@ -386,7 +504,7 @@ class _$_InitAudioPlayerEvent implements _InitAudioPlayerEvent {
     required TResult orElse(),
   }) {
     if (initAudioPlayer != null) {
-      return initAudioPlayer(path);
+      return initAudioPlayer(songs, initialIndex);
     }
     return orElse();
   }
@@ -397,7 +515,17 @@ class _$_InitAudioPlayerEvent implements _InitAudioPlayerEvent {
     required TResult Function(_GetSingleSongEvent value) getSingleSong,
     required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
     required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
     required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
     required TResult Function(_DisposeAudioEvent value) disposeAudio,
     required TResult Function(_PauseAudioEvent value) pauseAudio,
     required TResult Function(_StopAudioEvent value) stopAudio,
@@ -412,7 +540,13 @@ class _$_InitAudioPlayerEvent implements _InitAudioPlayerEvent {
     TResult? Function(_GetSingleSongEvent value)? getSingleSong,
     TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult? Function(_DisposeAudioEvent value)? disposeAudio,
     TResult? Function(_PauseAudioEvent value)? pauseAudio,
     TResult? Function(_StopAudioEvent value)? stopAudio,
@@ -427,7 +561,13 @@ class _$_InitAudioPlayerEvent implements _InitAudioPlayerEvent {
     TResult Function(_GetSingleSongEvent value)? getSingleSong,
     TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult Function(_DisposeAudioEvent value)? disposeAudio,
     TResult Function(_PauseAudioEvent value)? pauseAudio,
     TResult Function(_StopAudioEvent value)? stopAudio,
@@ -442,10 +582,11 @@ class _$_InitAudioPlayerEvent implements _InitAudioPlayerEvent {
 }
 
 abstract class _InitAudioPlayerEvent implements SongDetailEvent {
-  const factory _InitAudioPlayerEvent(final String path) =
-      _$_InitAudioPlayerEvent;
+  const factory _InitAudioPlayerEvent(
+      final List<Song> songs, final int initialIndex) = _$_InitAudioPlayerEvent;
 
-  String get path;
+  List<Song> get songs;
+  int get initialIndex;
   @JsonKey(ignore: true)
   _$$_InitAudioPlayerEventCopyWith<_$_InitAudioPlayerEvent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -490,9 +631,16 @@ class _$_PlayAudioEvent implements _PlayAudioEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getSingleSong,
-    required TResult Function(String path) initAudioPlayer,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
     required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
     required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
     required TResult Function() disposeAudio,
     required TResult Function() pauseAudio,
     required TResult Function() stopAudio,
@@ -505,9 +653,15 @@ class _$_PlayAudioEvent implements _PlayAudioEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getSingleSong,
-    TResult? Function(String path)? initAudioPlayer,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
     TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
     TResult? Function()? disposeAudio,
     TResult? Function()? pauseAudio,
     TResult? Function()? stopAudio,
@@ -520,9 +674,15 @@ class _$_PlayAudioEvent implements _PlayAudioEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getSingleSong,
-    TResult Function(String path)? initAudioPlayer,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
     TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
     TResult Function()? disposeAudio,
     TResult Function()? pauseAudio,
     TResult Function()? stopAudio,
@@ -541,7 +701,17 @@ class _$_PlayAudioEvent implements _PlayAudioEvent {
     required TResult Function(_GetSingleSongEvent value) getSingleSong,
     required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
     required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
     required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
     required TResult Function(_DisposeAudioEvent value) disposeAudio,
     required TResult Function(_PauseAudioEvent value) pauseAudio,
     required TResult Function(_StopAudioEvent value) stopAudio,
@@ -556,7 +726,13 @@ class _$_PlayAudioEvent implements _PlayAudioEvent {
     TResult? Function(_GetSingleSongEvent value)? getSingleSong,
     TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult? Function(_DisposeAudioEvent value)? disposeAudio,
     TResult? Function(_PauseAudioEvent value)? pauseAudio,
     TResult? Function(_StopAudioEvent value)? stopAudio,
@@ -571,7 +747,13 @@ class _$_PlayAudioEvent implements _PlayAudioEvent {
     TResult Function(_GetSingleSongEvent value)? getSingleSong,
     TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult Function(_DisposeAudioEvent value)? disposeAudio,
     TResult Function(_PauseAudioEvent value)? pauseAudio,
     TResult Function(_StopAudioEvent value)? stopAudio,
@@ -587,6 +769,612 @@ class _$_PlayAudioEvent implements _PlayAudioEvent {
 
 abstract class _PlayAudioEvent implements SongDetailEvent {
   const factory _PlayAudioEvent() = _$_PlayAudioEvent;
+}
+
+/// @nodoc
+abstract class _$$_ChangeCurrentIndexEventCopyWith<$Res> {
+  factory _$$_ChangeCurrentIndexEventCopyWith(_$_ChangeCurrentIndexEvent value,
+          $Res Function(_$_ChangeCurrentIndexEvent) then) =
+      __$$_ChangeCurrentIndexEventCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$$_ChangeCurrentIndexEventCopyWithImpl<$Res>
+    extends _$SongDetailEventCopyWithImpl<$Res, _$_ChangeCurrentIndexEvent>
+    implements _$$_ChangeCurrentIndexEventCopyWith<$Res> {
+  __$$_ChangeCurrentIndexEventCopyWithImpl(_$_ChangeCurrentIndexEvent _value,
+      $Res Function(_$_ChangeCurrentIndexEvent) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+  }) {
+    return _then(_$_ChangeCurrentIndexEvent(
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ChangeCurrentIndexEvent implements _ChangeCurrentIndexEvent {
+  const _$_ChangeCurrentIndexEvent(this.index);
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'SongDetailEvent.changeCurrentIndex(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ChangeCurrentIndexEvent &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ChangeCurrentIndexEventCopyWith<_$_ChangeCurrentIndexEvent>
+      get copyWith =>
+          __$$_ChangeCurrentIndexEventCopyWithImpl<_$_ChangeCurrentIndexEvent>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) getSingleSong,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
+    required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
+    required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
+    required TResult Function() disposeAudio,
+    required TResult Function() pauseAudio,
+    required TResult Function() stopAudio,
+    required TResult Function() closeBloc,
+  }) {
+    return changeCurrentIndex(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getSingleSong,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
+    TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
+    TResult? Function()? disposeAudio,
+    TResult? Function()? pauseAudio,
+    TResult? Function()? stopAudio,
+    TResult? Function()? closeBloc,
+  }) {
+    return changeCurrentIndex?.call(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getSingleSong,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
+    TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
+    TResult Function()? disposeAudio,
+    TResult Function()? pauseAudio,
+    TResult Function()? stopAudio,
+    TResult Function()? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (changeCurrentIndex != null) {
+      return changeCurrentIndex(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSingleSongEvent value) getSingleSong,
+    required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
+    required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
+    required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
+    required TResult Function(_DisposeAudioEvent value) disposeAudio,
+    required TResult Function(_PauseAudioEvent value) pauseAudio,
+    required TResult Function(_StopAudioEvent value) stopAudio,
+    required TResult Function(_CloseBlocEvent value) closeBloc,
+  }) {
+    return changeCurrentIndex(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult? Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult? Function(_PauseAudioEvent value)? pauseAudio,
+    TResult? Function(_StopAudioEvent value)? stopAudio,
+    TResult? Function(_CloseBlocEvent value)? closeBloc,
+  }) {
+    return changeCurrentIndex?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult Function(_PauseAudioEvent value)? pauseAudio,
+    TResult Function(_StopAudioEvent value)? stopAudio,
+    TResult Function(_CloseBlocEvent value)? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (changeCurrentIndex != null) {
+      return changeCurrentIndex(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangeCurrentIndexEvent implements SongDetailEvent {
+  const factory _ChangeCurrentIndexEvent(final int index) =
+      _$_ChangeCurrentIndexEvent;
+
+  int get index;
+  @JsonKey(ignore: true)
+  _$$_ChangeCurrentIndexEventCopyWith<_$_ChangeCurrentIndexEvent>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetLoopModeEventCopyWith<$Res> {
+  factory _$$_SetLoopModeEventCopyWith(
+          _$_SetLoopModeEvent value, $Res Function(_$_SetLoopModeEvent) then) =
+      __$$_SetLoopModeEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SetLoopModeEventCopyWithImpl<$Res>
+    extends _$SongDetailEventCopyWithImpl<$Res, _$_SetLoopModeEvent>
+    implements _$$_SetLoopModeEventCopyWith<$Res> {
+  __$$_SetLoopModeEventCopyWithImpl(
+      _$_SetLoopModeEvent _value, $Res Function(_$_SetLoopModeEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SetLoopModeEvent implements _SetLoopModeEvent {
+  const _$_SetLoopModeEvent();
+
+  @override
+  String toString() {
+    return 'SongDetailEvent.setLoopMode()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SetLoopModeEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) getSingleSong,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
+    required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
+    required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
+    required TResult Function() disposeAudio,
+    required TResult Function() pauseAudio,
+    required TResult Function() stopAudio,
+    required TResult Function() closeBloc,
+  }) {
+    return setLoopMode();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getSingleSong,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
+    TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
+    TResult? Function()? disposeAudio,
+    TResult? Function()? pauseAudio,
+    TResult? Function()? stopAudio,
+    TResult? Function()? closeBloc,
+  }) {
+    return setLoopMode?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getSingleSong,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
+    TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
+    TResult Function()? disposeAudio,
+    TResult Function()? pauseAudio,
+    TResult Function()? stopAudio,
+    TResult Function()? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (setLoopMode != null) {
+      return setLoopMode();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSingleSongEvent value) getSingleSong,
+    required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
+    required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
+    required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
+    required TResult Function(_DisposeAudioEvent value) disposeAudio,
+    required TResult Function(_PauseAudioEvent value) pauseAudio,
+    required TResult Function(_StopAudioEvent value) stopAudio,
+    required TResult Function(_CloseBlocEvent value) closeBloc,
+  }) {
+    return setLoopMode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult? Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult? Function(_PauseAudioEvent value)? pauseAudio,
+    TResult? Function(_StopAudioEvent value)? stopAudio,
+    TResult? Function(_CloseBlocEvent value)? closeBloc,
+  }) {
+    return setLoopMode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult Function(_PauseAudioEvent value)? pauseAudio,
+    TResult Function(_StopAudioEvent value)? stopAudio,
+    TResult Function(_CloseBlocEvent value)? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (setLoopMode != null) {
+      return setLoopMode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetLoopModeEvent implements SongDetailEvent {
+  const factory _SetLoopModeEvent() = _$_SetLoopModeEvent;
+}
+
+/// @nodoc
+abstract class _$$_SetShuffleModeEnabledEventCopyWith<$Res> {
+  factory _$$_SetShuffleModeEnabledEventCopyWith(
+          _$_SetShuffleModeEnabledEvent value,
+          $Res Function(_$_SetShuffleModeEnabledEvent) then) =
+      __$$_SetShuffleModeEnabledEventCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool enabled});
+}
+
+/// @nodoc
+class __$$_SetShuffleModeEnabledEventCopyWithImpl<$Res>
+    extends _$SongDetailEventCopyWithImpl<$Res, _$_SetShuffleModeEnabledEvent>
+    implements _$$_SetShuffleModeEnabledEventCopyWith<$Res> {
+  __$$_SetShuffleModeEnabledEventCopyWithImpl(
+      _$_SetShuffleModeEnabledEvent _value,
+      $Res Function(_$_SetShuffleModeEnabledEvent) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? enabled = null,
+  }) {
+    return _then(_$_SetShuffleModeEnabledEvent(
+      null == enabled
+          ? _value.enabled
+          : enabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetShuffleModeEnabledEvent implements _SetShuffleModeEnabledEvent {
+  const _$_SetShuffleModeEnabledEvent(this.enabled);
+
+  @override
+  final bool enabled;
+
+  @override
+  String toString() {
+    return 'SongDetailEvent.setShuffleModeEnabled(enabled: $enabled)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetShuffleModeEnabledEvent &&
+            (identical(other.enabled, enabled) || other.enabled == enabled));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, enabled);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetShuffleModeEnabledEventCopyWith<_$_SetShuffleModeEnabledEvent>
+      get copyWith => __$$_SetShuffleModeEnabledEventCopyWithImpl<
+          _$_SetShuffleModeEnabledEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) getSingleSong,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
+    required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
+    required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
+    required TResult Function() disposeAudio,
+    required TResult Function() pauseAudio,
+    required TResult Function() stopAudio,
+    required TResult Function() closeBloc,
+  }) {
+    return setShuffleModeEnabled(enabled);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getSingleSong,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
+    TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
+    TResult? Function()? disposeAudio,
+    TResult? Function()? pauseAudio,
+    TResult? Function()? stopAudio,
+    TResult? Function()? closeBloc,
+  }) {
+    return setShuffleModeEnabled?.call(enabled);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getSingleSong,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
+    TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
+    TResult Function()? disposeAudio,
+    TResult Function()? pauseAudio,
+    TResult Function()? stopAudio,
+    TResult Function()? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (setShuffleModeEnabled != null) {
+      return setShuffleModeEnabled(enabled);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSingleSongEvent value) getSingleSong,
+    required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
+    required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
+    required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
+    required TResult Function(_DisposeAudioEvent value) disposeAudio,
+    required TResult Function(_PauseAudioEvent value) pauseAudio,
+    required TResult Function(_StopAudioEvent value) stopAudio,
+    required TResult Function(_CloseBlocEvent value) closeBloc,
+  }) {
+    return setShuffleModeEnabled(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult? Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult? Function(_PauseAudioEvent value)? pauseAudio,
+    TResult? Function(_StopAudioEvent value)? stopAudio,
+    TResult? Function(_CloseBlocEvent value)? closeBloc,
+  }) {
+    return setShuffleModeEnabled?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult Function(_PauseAudioEvent value)? pauseAudio,
+    TResult Function(_StopAudioEvent value)? stopAudio,
+    TResult Function(_CloseBlocEvent value)? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (setShuffleModeEnabled != null) {
+      return setShuffleModeEnabled(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetShuffleModeEnabledEvent implements SongDetailEvent {
+  const factory _SetShuffleModeEnabledEvent(final bool enabled) =
+      _$_SetShuffleModeEnabledEvent;
+
+  bool get enabled;
+  @JsonKey(ignore: true)
+  _$$_SetShuffleModeEnabledEventCopyWith<_$_SetShuffleModeEnabledEvent>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -655,9 +1443,16 @@ class _$_SeekAudioEvent implements _SeekAudioEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getSingleSong,
-    required TResult Function(String path) initAudioPlayer,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
     required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
     required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
     required TResult Function() disposeAudio,
     required TResult Function() pauseAudio,
     required TResult Function() stopAudio,
@@ -670,9 +1465,15 @@ class _$_SeekAudioEvent implements _SeekAudioEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getSingleSong,
-    TResult? Function(String path)? initAudioPlayer,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
     TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
     TResult? Function()? disposeAudio,
     TResult? Function()? pauseAudio,
     TResult? Function()? stopAudio,
@@ -685,9 +1486,15 @@ class _$_SeekAudioEvent implements _SeekAudioEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getSingleSong,
-    TResult Function(String path)? initAudioPlayer,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
     TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
     TResult Function()? disposeAudio,
     TResult Function()? pauseAudio,
     TResult Function()? stopAudio,
@@ -706,7 +1513,17 @@ class _$_SeekAudioEvent implements _SeekAudioEvent {
     required TResult Function(_GetSingleSongEvent value) getSingleSong,
     required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
     required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
     required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
     required TResult Function(_DisposeAudioEvent value) disposeAudio,
     required TResult Function(_PauseAudioEvent value) pauseAudio,
     required TResult Function(_StopAudioEvent value) stopAudio,
@@ -721,7 +1538,13 @@ class _$_SeekAudioEvent implements _SeekAudioEvent {
     TResult? Function(_GetSingleSongEvent value)? getSingleSong,
     TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult? Function(_DisposeAudioEvent value)? disposeAudio,
     TResult? Function(_PauseAudioEvent value)? pauseAudio,
     TResult? Function(_StopAudioEvent value)? stopAudio,
@@ -736,7 +1559,13 @@ class _$_SeekAudioEvent implements _SeekAudioEvent {
     TResult Function(_GetSingleSongEvent value)? getSingleSong,
     TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult Function(_DisposeAudioEvent value)? disposeAudio,
     TResult Function(_PauseAudioEvent value)? pauseAudio,
     TResult Function(_StopAudioEvent value)? stopAudio,
@@ -757,6 +1586,588 @@ abstract class _SeekAudioEvent implements SongDetailEvent {
   @JsonKey(ignore: true)
   _$$_SeekAudioEventCopyWith<_$_SeekAudioEvent> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SeekAudioWithIndexEventCopyWith<$Res> {
+  factory _$$_SeekAudioWithIndexEventCopyWith(_$_SeekAudioWithIndexEvent value,
+          $Res Function(_$_SeekAudioWithIndexEvent) then) =
+      __$$_SeekAudioWithIndexEventCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Duration duration, int index});
+}
+
+/// @nodoc
+class __$$_SeekAudioWithIndexEventCopyWithImpl<$Res>
+    extends _$SongDetailEventCopyWithImpl<$Res, _$_SeekAudioWithIndexEvent>
+    implements _$$_SeekAudioWithIndexEventCopyWith<$Res> {
+  __$$_SeekAudioWithIndexEventCopyWithImpl(_$_SeekAudioWithIndexEvent _value,
+      $Res Function(_$_SeekAudioWithIndexEvent) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? duration = null,
+    Object? index = null,
+  }) {
+    return _then(_$_SeekAudioWithIndexEvent(
+      null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SeekAudioWithIndexEvent implements _SeekAudioWithIndexEvent {
+  const _$_SeekAudioWithIndexEvent(this.duration, this.index);
+
+  @override
+  final Duration duration;
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'SongDetailEvent.seekAudioWithIndex(duration: $duration, index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SeekAudioWithIndexEvent &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, duration, index);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SeekAudioWithIndexEventCopyWith<_$_SeekAudioWithIndexEvent>
+      get copyWith =>
+          __$$_SeekAudioWithIndexEventCopyWithImpl<_$_SeekAudioWithIndexEvent>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) getSingleSong,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
+    required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
+    required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
+    required TResult Function() disposeAudio,
+    required TResult Function() pauseAudio,
+    required TResult Function() stopAudio,
+    required TResult Function() closeBloc,
+  }) {
+    return seekAudioWithIndex(duration, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getSingleSong,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
+    TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
+    TResult? Function()? disposeAudio,
+    TResult? Function()? pauseAudio,
+    TResult? Function()? stopAudio,
+    TResult? Function()? closeBloc,
+  }) {
+    return seekAudioWithIndex?.call(duration, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getSingleSong,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
+    TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
+    TResult Function()? disposeAudio,
+    TResult Function()? pauseAudio,
+    TResult Function()? stopAudio,
+    TResult Function()? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (seekAudioWithIndex != null) {
+      return seekAudioWithIndex(duration, index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSingleSongEvent value) getSingleSong,
+    required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
+    required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
+    required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
+    required TResult Function(_DisposeAudioEvent value) disposeAudio,
+    required TResult Function(_PauseAudioEvent value) pauseAudio,
+    required TResult Function(_StopAudioEvent value) stopAudio,
+    required TResult Function(_CloseBlocEvent value) closeBloc,
+  }) {
+    return seekAudioWithIndex(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult? Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult? Function(_PauseAudioEvent value)? pauseAudio,
+    TResult? Function(_StopAudioEvent value)? stopAudio,
+    TResult? Function(_CloseBlocEvent value)? closeBloc,
+  }) {
+    return seekAudioWithIndex?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult Function(_PauseAudioEvent value)? pauseAudio,
+    TResult Function(_StopAudioEvent value)? stopAudio,
+    TResult Function(_CloseBlocEvent value)? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (seekAudioWithIndex != null) {
+      return seekAudioWithIndex(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SeekAudioWithIndexEvent implements SongDetailEvent {
+  const factory _SeekAudioWithIndexEvent(
+      final Duration duration, final int index) = _$_SeekAudioWithIndexEvent;
+
+  Duration get duration;
+  int get index;
+  @JsonKey(ignore: true)
+  _$$_SeekAudioWithIndexEventCopyWith<_$_SeekAudioWithIndexEvent>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SeekAudioToNextEventCopyWith<$Res> {
+  factory _$$_SeekAudioToNextEventCopyWith(_$_SeekAudioToNextEvent value,
+          $Res Function(_$_SeekAudioToNextEvent) then) =
+      __$$_SeekAudioToNextEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SeekAudioToNextEventCopyWithImpl<$Res>
+    extends _$SongDetailEventCopyWithImpl<$Res, _$_SeekAudioToNextEvent>
+    implements _$$_SeekAudioToNextEventCopyWith<$Res> {
+  __$$_SeekAudioToNextEventCopyWithImpl(_$_SeekAudioToNextEvent _value,
+      $Res Function(_$_SeekAudioToNextEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SeekAudioToNextEvent implements _SeekAudioToNextEvent {
+  const _$_SeekAudioToNextEvent();
+
+  @override
+  String toString() {
+    return 'SongDetailEvent.seekAudioToNext()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SeekAudioToNextEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) getSingleSong,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
+    required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
+    required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
+    required TResult Function() disposeAudio,
+    required TResult Function() pauseAudio,
+    required TResult Function() stopAudio,
+    required TResult Function() closeBloc,
+  }) {
+    return seekAudioToNext();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getSingleSong,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
+    TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
+    TResult? Function()? disposeAudio,
+    TResult? Function()? pauseAudio,
+    TResult? Function()? stopAudio,
+    TResult? Function()? closeBloc,
+  }) {
+    return seekAudioToNext?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getSingleSong,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
+    TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
+    TResult Function()? disposeAudio,
+    TResult Function()? pauseAudio,
+    TResult Function()? stopAudio,
+    TResult Function()? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (seekAudioToNext != null) {
+      return seekAudioToNext();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSingleSongEvent value) getSingleSong,
+    required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
+    required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
+    required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
+    required TResult Function(_DisposeAudioEvent value) disposeAudio,
+    required TResult Function(_PauseAudioEvent value) pauseAudio,
+    required TResult Function(_StopAudioEvent value) stopAudio,
+    required TResult Function(_CloseBlocEvent value) closeBloc,
+  }) {
+    return seekAudioToNext(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult? Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult? Function(_PauseAudioEvent value)? pauseAudio,
+    TResult? Function(_StopAudioEvent value)? stopAudio,
+    TResult? Function(_CloseBlocEvent value)? closeBloc,
+  }) {
+    return seekAudioToNext?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult Function(_PauseAudioEvent value)? pauseAudio,
+    TResult Function(_StopAudioEvent value)? stopAudio,
+    TResult Function(_CloseBlocEvent value)? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (seekAudioToNext != null) {
+      return seekAudioToNext(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SeekAudioToNextEvent implements SongDetailEvent {
+  const factory _SeekAudioToNextEvent() = _$_SeekAudioToNextEvent;
+}
+
+/// @nodoc
+abstract class _$$_SeekAudioToPreviousventCopyWith<$Res> {
+  factory _$$_SeekAudioToPreviousventCopyWith(_$_SeekAudioToPreviousvent value,
+          $Res Function(_$_SeekAudioToPreviousvent) then) =
+      __$$_SeekAudioToPreviousventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SeekAudioToPreviousventCopyWithImpl<$Res>
+    extends _$SongDetailEventCopyWithImpl<$Res, _$_SeekAudioToPreviousvent>
+    implements _$$_SeekAudioToPreviousventCopyWith<$Res> {
+  __$$_SeekAudioToPreviousventCopyWithImpl(_$_SeekAudioToPreviousvent _value,
+      $Res Function(_$_SeekAudioToPreviousvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SeekAudioToPreviousvent implements _SeekAudioToPreviousvent {
+  const _$_SeekAudioToPreviousvent();
+
+  @override
+  String toString() {
+    return 'SongDetailEvent.seekAudioToPrevious()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SeekAudioToPreviousvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) getSingleSong,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
+    required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
+    required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
+    required TResult Function() disposeAudio,
+    required TResult Function() pauseAudio,
+    required TResult Function() stopAudio,
+    required TResult Function() closeBloc,
+  }) {
+    return seekAudioToPrevious();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getSingleSong,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
+    TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
+    TResult? Function()? disposeAudio,
+    TResult? Function()? pauseAudio,
+    TResult? Function()? stopAudio,
+    TResult? Function()? closeBloc,
+  }) {
+    return seekAudioToPrevious?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getSingleSong,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
+    TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
+    TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
+    TResult Function()? disposeAudio,
+    TResult Function()? pauseAudio,
+    TResult Function()? stopAudio,
+    TResult Function()? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (seekAudioToPrevious != null) {
+      return seekAudioToPrevious();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSingleSongEvent value) getSingleSong,
+    required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
+    required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
+    required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
+    required TResult Function(_DisposeAudioEvent value) disposeAudio,
+    required TResult Function(_PauseAudioEvent value) pauseAudio,
+    required TResult Function(_StopAudioEvent value) stopAudio,
+    required TResult Function(_CloseBlocEvent value) closeBloc,
+  }) {
+    return seekAudioToPrevious(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult? Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult? Function(_PauseAudioEvent value)? pauseAudio,
+    TResult? Function(_StopAudioEvent value)? stopAudio,
+    TResult? Function(_CloseBlocEvent value)? closeBloc,
+  }) {
+    return seekAudioToPrevious?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSingleSongEvent value)? getSingleSong,
+    TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
+    TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
+    TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
+    TResult Function(_DisposeAudioEvent value)? disposeAudio,
+    TResult Function(_PauseAudioEvent value)? pauseAudio,
+    TResult Function(_StopAudioEvent value)? stopAudio,
+    TResult Function(_CloseBlocEvent value)? closeBloc,
+    required TResult orElse(),
+  }) {
+    if (seekAudioToPrevious != null) {
+      return seekAudioToPrevious(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SeekAudioToPreviousvent implements SongDetailEvent {
+  const factory _SeekAudioToPreviousvent() = _$_SeekAudioToPreviousvent;
 }
 
 /// @nodoc
@@ -798,9 +2209,16 @@ class _$_DisposeAudioEvent implements _DisposeAudioEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getSingleSong,
-    required TResult Function(String path) initAudioPlayer,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
     required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
     required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
     required TResult Function() disposeAudio,
     required TResult Function() pauseAudio,
     required TResult Function() stopAudio,
@@ -813,9 +2231,15 @@ class _$_DisposeAudioEvent implements _DisposeAudioEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getSingleSong,
-    TResult? Function(String path)? initAudioPlayer,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
     TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
     TResult? Function()? disposeAudio,
     TResult? Function()? pauseAudio,
     TResult? Function()? stopAudio,
@@ -828,9 +2252,15 @@ class _$_DisposeAudioEvent implements _DisposeAudioEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getSingleSong,
-    TResult Function(String path)? initAudioPlayer,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
     TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
     TResult Function()? disposeAudio,
     TResult Function()? pauseAudio,
     TResult Function()? stopAudio,
@@ -849,7 +2279,17 @@ class _$_DisposeAudioEvent implements _DisposeAudioEvent {
     required TResult Function(_GetSingleSongEvent value) getSingleSong,
     required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
     required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
     required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
     required TResult Function(_DisposeAudioEvent value) disposeAudio,
     required TResult Function(_PauseAudioEvent value) pauseAudio,
     required TResult Function(_StopAudioEvent value) stopAudio,
@@ -864,7 +2304,13 @@ class _$_DisposeAudioEvent implements _DisposeAudioEvent {
     TResult? Function(_GetSingleSongEvent value)? getSingleSong,
     TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult? Function(_DisposeAudioEvent value)? disposeAudio,
     TResult? Function(_PauseAudioEvent value)? pauseAudio,
     TResult? Function(_StopAudioEvent value)? stopAudio,
@@ -879,7 +2325,13 @@ class _$_DisposeAudioEvent implements _DisposeAudioEvent {
     TResult Function(_GetSingleSongEvent value)? getSingleSong,
     TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult Function(_DisposeAudioEvent value)? disposeAudio,
     TResult Function(_PauseAudioEvent value)? pauseAudio,
     TResult Function(_StopAudioEvent value)? stopAudio,
@@ -936,9 +2388,16 @@ class _$_PauseAudioEvent implements _PauseAudioEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getSingleSong,
-    required TResult Function(String path) initAudioPlayer,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
     required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
     required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
     required TResult Function() disposeAudio,
     required TResult Function() pauseAudio,
     required TResult Function() stopAudio,
@@ -951,9 +2410,15 @@ class _$_PauseAudioEvent implements _PauseAudioEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getSingleSong,
-    TResult? Function(String path)? initAudioPlayer,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
     TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
     TResult? Function()? disposeAudio,
     TResult? Function()? pauseAudio,
     TResult? Function()? stopAudio,
@@ -966,9 +2431,15 @@ class _$_PauseAudioEvent implements _PauseAudioEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getSingleSong,
-    TResult Function(String path)? initAudioPlayer,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
     TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
     TResult Function()? disposeAudio,
     TResult Function()? pauseAudio,
     TResult Function()? stopAudio,
@@ -987,7 +2458,17 @@ class _$_PauseAudioEvent implements _PauseAudioEvent {
     required TResult Function(_GetSingleSongEvent value) getSingleSong,
     required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
     required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
     required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
     required TResult Function(_DisposeAudioEvent value) disposeAudio,
     required TResult Function(_PauseAudioEvent value) pauseAudio,
     required TResult Function(_StopAudioEvent value) stopAudio,
@@ -1002,7 +2483,13 @@ class _$_PauseAudioEvent implements _PauseAudioEvent {
     TResult? Function(_GetSingleSongEvent value)? getSingleSong,
     TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult? Function(_DisposeAudioEvent value)? disposeAudio,
     TResult? Function(_PauseAudioEvent value)? pauseAudio,
     TResult? Function(_StopAudioEvent value)? stopAudio,
@@ -1017,7 +2504,13 @@ class _$_PauseAudioEvent implements _PauseAudioEvent {
     TResult Function(_GetSingleSongEvent value)? getSingleSong,
     TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult Function(_DisposeAudioEvent value)? disposeAudio,
     TResult Function(_PauseAudioEvent value)? pauseAudio,
     TResult Function(_StopAudioEvent value)? stopAudio,
@@ -1074,9 +2567,16 @@ class _$_StopAudioEvent implements _StopAudioEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getSingleSong,
-    required TResult Function(String path) initAudioPlayer,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
     required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
     required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
     required TResult Function() disposeAudio,
     required TResult Function() pauseAudio,
     required TResult Function() stopAudio,
@@ -1089,9 +2589,15 @@ class _$_StopAudioEvent implements _StopAudioEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getSingleSong,
-    TResult? Function(String path)? initAudioPlayer,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
     TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
     TResult? Function()? disposeAudio,
     TResult? Function()? pauseAudio,
     TResult? Function()? stopAudio,
@@ -1104,9 +2610,15 @@ class _$_StopAudioEvent implements _StopAudioEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getSingleSong,
-    TResult Function(String path)? initAudioPlayer,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
     TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
     TResult Function()? disposeAudio,
     TResult Function()? pauseAudio,
     TResult Function()? stopAudio,
@@ -1125,7 +2637,17 @@ class _$_StopAudioEvent implements _StopAudioEvent {
     required TResult Function(_GetSingleSongEvent value) getSingleSong,
     required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
     required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
     required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
     required TResult Function(_DisposeAudioEvent value) disposeAudio,
     required TResult Function(_PauseAudioEvent value) pauseAudio,
     required TResult Function(_StopAudioEvent value) stopAudio,
@@ -1140,7 +2662,13 @@ class _$_StopAudioEvent implements _StopAudioEvent {
     TResult? Function(_GetSingleSongEvent value)? getSingleSong,
     TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult? Function(_DisposeAudioEvent value)? disposeAudio,
     TResult? Function(_PauseAudioEvent value)? pauseAudio,
     TResult? Function(_StopAudioEvent value)? stopAudio,
@@ -1155,7 +2683,13 @@ class _$_StopAudioEvent implements _StopAudioEvent {
     TResult Function(_GetSingleSongEvent value)? getSingleSong,
     TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult Function(_DisposeAudioEvent value)? disposeAudio,
     TResult Function(_PauseAudioEvent value)? pauseAudio,
     TResult Function(_StopAudioEvent value)? stopAudio,
@@ -1212,9 +2746,16 @@ class _$_CloseBlocEvent implements _CloseBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getSingleSong,
-    required TResult Function(String path) initAudioPlayer,
+    required TResult Function(List<Song> songs, int initialIndex)
+        initAudioPlayer,
     required TResult Function() playAudio,
+    required TResult Function(int index) changeCurrentIndex,
+    required TResult Function() setLoopMode,
+    required TResult Function(bool enabled) setShuffleModeEnabled,
     required TResult Function(Duration duration) seekAudio,
+    required TResult Function(Duration duration, int index) seekAudioWithIndex,
+    required TResult Function() seekAudioToNext,
+    required TResult Function() seekAudioToPrevious,
     required TResult Function() disposeAudio,
     required TResult Function() pauseAudio,
     required TResult Function() stopAudio,
@@ -1227,9 +2768,15 @@ class _$_CloseBlocEvent implements _CloseBlocEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getSingleSong,
-    TResult? Function(String path)? initAudioPlayer,
+    TResult? Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult? Function()? playAudio,
+    TResult? Function(int index)? changeCurrentIndex,
+    TResult? Function()? setLoopMode,
+    TResult? Function(bool enabled)? setShuffleModeEnabled,
     TResult? Function(Duration duration)? seekAudio,
+    TResult? Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult? Function()? seekAudioToNext,
+    TResult? Function()? seekAudioToPrevious,
     TResult? Function()? disposeAudio,
     TResult? Function()? pauseAudio,
     TResult? Function()? stopAudio,
@@ -1242,9 +2789,15 @@ class _$_CloseBlocEvent implements _CloseBlocEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getSingleSong,
-    TResult Function(String path)? initAudioPlayer,
+    TResult Function(List<Song> songs, int initialIndex)? initAudioPlayer,
     TResult Function()? playAudio,
+    TResult Function(int index)? changeCurrentIndex,
+    TResult Function()? setLoopMode,
+    TResult Function(bool enabled)? setShuffleModeEnabled,
     TResult Function(Duration duration)? seekAudio,
+    TResult Function(Duration duration, int index)? seekAudioWithIndex,
+    TResult Function()? seekAudioToNext,
+    TResult Function()? seekAudioToPrevious,
     TResult Function()? disposeAudio,
     TResult Function()? pauseAudio,
     TResult Function()? stopAudio,
@@ -1263,7 +2816,17 @@ class _$_CloseBlocEvent implements _CloseBlocEvent {
     required TResult Function(_GetSingleSongEvent value) getSingleSong,
     required TResult Function(_InitAudioPlayerEvent value) initAudioPlayer,
     required TResult Function(_PlayAudioEvent value) playAudio,
+    required TResult Function(_ChangeCurrentIndexEvent value)
+        changeCurrentIndex,
+    required TResult Function(_SetLoopModeEvent value) setLoopMode,
+    required TResult Function(_SetShuffleModeEnabledEvent value)
+        setShuffleModeEnabled,
     required TResult Function(_SeekAudioEvent value) seekAudio,
+    required TResult Function(_SeekAudioWithIndexEvent value)
+        seekAudioWithIndex,
+    required TResult Function(_SeekAudioToNextEvent value) seekAudioToNext,
+    required TResult Function(_SeekAudioToPreviousvent value)
+        seekAudioToPrevious,
     required TResult Function(_DisposeAudioEvent value) disposeAudio,
     required TResult Function(_PauseAudioEvent value) pauseAudio,
     required TResult Function(_StopAudioEvent value) stopAudio,
@@ -1278,7 +2841,13 @@ class _$_CloseBlocEvent implements _CloseBlocEvent {
     TResult? Function(_GetSingleSongEvent value)? getSingleSong,
     TResult? Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult? Function(_PlayAudioEvent value)? playAudio,
+    TResult? Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult? Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult? Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult? Function(_SeekAudioEvent value)? seekAudio,
+    TResult? Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult? Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult? Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult? Function(_DisposeAudioEvent value)? disposeAudio,
     TResult? Function(_PauseAudioEvent value)? pauseAudio,
     TResult? Function(_StopAudioEvent value)? stopAudio,
@@ -1293,7 +2862,13 @@ class _$_CloseBlocEvent implements _CloseBlocEvent {
     TResult Function(_GetSingleSongEvent value)? getSingleSong,
     TResult Function(_InitAudioPlayerEvent value)? initAudioPlayer,
     TResult Function(_PlayAudioEvent value)? playAudio,
+    TResult Function(_ChangeCurrentIndexEvent value)? changeCurrentIndex,
+    TResult Function(_SetLoopModeEvent value)? setLoopMode,
+    TResult Function(_SetShuffleModeEnabledEvent value)? setShuffleModeEnabled,
     TResult Function(_SeekAudioEvent value)? seekAudio,
+    TResult Function(_SeekAudioWithIndexEvent value)? seekAudioWithIndex,
+    TResult Function(_SeekAudioToNextEvent value)? seekAudioToNext,
+    TResult Function(_SeekAudioToPreviousvent value)? seekAudioToPrevious,
     TResult Function(_DisposeAudioEvent value)? disposeAudio,
     TResult Function(_PauseAudioEvent value)? pauseAudio,
     TResult Function(_StopAudioEvent value)? stopAudio,
@@ -1315,8 +2890,10 @@ abstract class _CloseBlocEvent implements SongDetailEvent {
 mixin _$SongDetailState {
   Failure? get failure => throw _privateConstructorUsedError;
   bool get isShowLoading => throw _privateConstructorUsedError;
-  Song? get song => throw _privateConstructorUsedError;
+  int get currentIndex => throw _privateConstructorUsedError;
   AudioPlayer? get audioPlayer => throw _privateConstructorUsedError;
+  AudioLoopMode get loopMode => throw _privateConstructorUsedError;
+  dynamic get isShuffled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SongDetailStateCopyWith<SongDetailState> get copyWith =>
@@ -1332,11 +2909,12 @@ abstract class $SongDetailStateCopyWith<$Res> {
   $Res call(
       {Failure? failure,
       bool isShowLoading,
-      Song? song,
-      AudioPlayer? audioPlayer});
+      int currentIndex,
+      AudioPlayer? audioPlayer,
+      AudioLoopMode loopMode,
+      dynamic isShuffled});
 
   $FailureCopyWith<$Res>? get failure;
-  $SongCopyWith<$Res>? get song;
 }
 
 /// @nodoc
@@ -1354,8 +2932,10 @@ class _$SongDetailStateCopyWithImpl<$Res, $Val extends SongDetailState>
   $Res call({
     Object? failure = freezed,
     Object? isShowLoading = null,
-    Object? song = freezed,
+    Object? currentIndex = null,
     Object? audioPlayer = freezed,
+    Object? loopMode = null,
+    Object? isShuffled = freezed,
   }) {
     return _then(_value.copyWith(
       failure: freezed == failure
@@ -1366,14 +2946,22 @@ class _$SongDetailStateCopyWithImpl<$Res, $Val extends SongDetailState>
           ? _value.isShowLoading
           : isShowLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      song: freezed == song
-          ? _value.song
-          : song // ignore: cast_nullable_to_non_nullable
-              as Song?,
+      currentIndex: null == currentIndex
+          ? _value.currentIndex
+          : currentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       audioPlayer: freezed == audioPlayer
           ? _value.audioPlayer
           : audioPlayer // ignore: cast_nullable_to_non_nullable
               as AudioPlayer?,
+      loopMode: null == loopMode
+          ? _value.loopMode
+          : loopMode // ignore: cast_nullable_to_non_nullable
+              as AudioLoopMode,
+      isShuffled: freezed == isShuffled
+          ? _value.isShuffled
+          : isShuffled // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 
@@ -1386,18 +2974,6 @@ class _$SongDetailStateCopyWithImpl<$Res, $Val extends SongDetailState>
 
     return $FailureCopyWith<$Res>(_value.failure!, (value) {
       return _then(_value.copyWith(failure: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SongCopyWith<$Res>? get song {
-    if (_value.song == null) {
-      return null;
-    }
-
-    return $SongCopyWith<$Res>(_value.song!, (value) {
-      return _then(_value.copyWith(song: value) as $Val);
     });
   }
 }
@@ -1413,13 +2989,13 @@ abstract class _$$_SongDetailStateCopyWith<$Res>
   $Res call(
       {Failure? failure,
       bool isShowLoading,
-      Song? song,
-      AudioPlayer? audioPlayer});
+      int currentIndex,
+      AudioPlayer? audioPlayer,
+      AudioLoopMode loopMode,
+      dynamic isShuffled});
 
   @override
   $FailureCopyWith<$Res>? get failure;
-  @override
-  $SongCopyWith<$Res>? get song;
 }
 
 /// @nodoc
@@ -1435,8 +3011,10 @@ class __$$_SongDetailStateCopyWithImpl<$Res>
   $Res call({
     Object? failure = freezed,
     Object? isShowLoading = null,
-    Object? song = freezed,
+    Object? currentIndex = null,
     Object? audioPlayer = freezed,
+    Object? loopMode = null,
+    Object? isShuffled = freezed,
   }) {
     return _then(_$_SongDetailState(
       failure: freezed == failure
@@ -1447,14 +3025,19 @@ class __$$_SongDetailStateCopyWithImpl<$Res>
           ? _value.isShowLoading
           : isShowLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      song: freezed == song
-          ? _value.song
-          : song // ignore: cast_nullable_to_non_nullable
-              as Song?,
+      currentIndex: null == currentIndex
+          ? _value.currentIndex
+          : currentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       audioPlayer: freezed == audioPlayer
           ? _value.audioPlayer
           : audioPlayer // ignore: cast_nullable_to_non_nullable
               as AudioPlayer?,
+      loopMode: null == loopMode
+          ? _value.loopMode
+          : loopMode // ignore: cast_nullable_to_non_nullable
+              as AudioLoopMode,
+      isShuffled: freezed == isShuffled ? _value.isShuffled! : isShuffled,
     ));
   }
 }
@@ -1463,7 +3046,12 @@ class __$$_SongDetailStateCopyWithImpl<$Res>
 
 class _$_SongDetailState implements _SongDetailState {
   const _$_SongDetailState(
-      {this.failure, this.isShowLoading = false, this.song, this.audioPlayer});
+      {this.failure,
+      this.isShowLoading = false,
+      this.currentIndex = 0,
+      this.audioPlayer,
+      this.loopMode = AudioLoopMode.off,
+      this.isShuffled = false});
 
   @override
   final Failure? failure;
@@ -1471,13 +3059,20 @@ class _$_SongDetailState implements _SongDetailState {
   @JsonKey()
   final bool isShowLoading;
   @override
-  final Song? song;
+  @JsonKey()
+  final int currentIndex;
   @override
   final AudioPlayer? audioPlayer;
+  @override
+  @JsonKey()
+  final AudioLoopMode loopMode;
+  @override
+  @JsonKey()
+  final dynamic isShuffled;
 
   @override
   String toString() {
-    return 'SongDetailState(failure: $failure, isShowLoading: $isShowLoading, song: $song, audioPlayer: $audioPlayer)';
+    return 'SongDetailState(failure: $failure, isShowLoading: $isShowLoading, currentIndex: $currentIndex, audioPlayer: $audioPlayer, loopMode: $loopMode, isShuffled: $isShuffled)';
   }
 
   @override
@@ -1488,14 +3083,25 @@ class _$_SongDetailState implements _SongDetailState {
             (identical(other.failure, failure) || other.failure == failure) &&
             (identical(other.isShowLoading, isShowLoading) ||
                 other.isShowLoading == isShowLoading) &&
-            (identical(other.song, song) || other.song == song) &&
+            (identical(other.currentIndex, currentIndex) ||
+                other.currentIndex == currentIndex) &&
             (identical(other.audioPlayer, audioPlayer) ||
-                other.audioPlayer == audioPlayer));
+                other.audioPlayer == audioPlayer) &&
+            (identical(other.loopMode, loopMode) ||
+                other.loopMode == loopMode) &&
+            const DeepCollectionEquality()
+                .equals(other.isShuffled, isShuffled));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, failure, isShowLoading, song, audioPlayer);
+  int get hashCode => Object.hash(
+      runtimeType,
+      failure,
+      isShowLoading,
+      currentIndex,
+      audioPlayer,
+      loopMode,
+      const DeepCollectionEquality().hash(isShuffled));
 
   @JsonKey(ignore: true)
   @override
@@ -1508,17 +3114,23 @@ abstract class _SongDetailState implements SongDetailState {
   const factory _SongDetailState(
       {final Failure? failure,
       final bool isShowLoading,
-      final Song? song,
-      final AudioPlayer? audioPlayer}) = _$_SongDetailState;
+      final int currentIndex,
+      final AudioPlayer? audioPlayer,
+      final AudioLoopMode loopMode,
+      final dynamic isShuffled}) = _$_SongDetailState;
 
   @override
   Failure? get failure;
   @override
   bool get isShowLoading;
   @override
-  Song? get song;
+  int get currentIndex;
   @override
   AudioPlayer? get audioPlayer;
+  @override
+  AudioLoopMode get loopMode;
+  @override
+  dynamic get isShuffled;
   @override
   @JsonKey(ignore: true)
   _$$_SongDetailStateCopyWith<_$_SongDetailState> get copyWith =>

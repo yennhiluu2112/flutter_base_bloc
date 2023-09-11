@@ -67,8 +67,20 @@ class _HomePageState extends BasePageScreenState<HomePage> {
                             separatorBuilder: (_, __) =>
                                 const SizedBox(height: 12),
                             itemBuilder: (context, index) {
-                              return SongTile(
-                                song: snapshot.docs[index].data(),
+                              return GestureDetector(
+                                onTap: () {
+                                  context.router.push(
+                                    SongDetailRoute(
+                                      songs: snapshot.docs
+                                          .map((e) => e.data())
+                                          .toList(),
+                                      initialIndex: index,
+                                    ),
+                                  );
+                                },
+                                child: SongTile(
+                                  song: snapshot.docs[index].data(),
+                                ),
                               );
                             },
                           );
@@ -92,45 +104,40 @@ class SongTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.router.push(SongDetailRoute(id: song.id!));
-      },
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: CachedNetworkImage(
-              imageUrl: song.imageUrl ?? '',
-              width: 70,
-              height: 70,
-              fit: BoxFit.cover,
-            ),
+    return Row(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: CachedNetworkImage(
+            imageUrl: song.imageUrl ?? '',
+            width: 70,
+            height: 70,
+            fit: BoxFit.cover,
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  song.name ?? '',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                song.name ?? '',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
                 ),
-                Text(
-                  song.singer ?? '',
-                  style: const TextStyle(),
-                ),
-              ],
-            ),
+              ),
+              Text(
+                song.singer ?? '',
+                style: const TextStyle(),
+              ),
+            ],
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.keyboard_control),
-          )
-        ],
-      ),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.keyboard_control),
+        )
+      ],
     );
   }
 }

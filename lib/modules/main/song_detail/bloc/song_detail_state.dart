@@ -5,7 +5,9 @@ class SongDetailState with _$SongDetailState {
   const factory SongDetailState({
     Failure? failure,
     @Default(false) bool isShowLoading,
-    Song? song,
+    @Default(0) int currentIndex,
     AudioPlayer? audioPlayer,
+    @Default(AudioLoopMode.off) AudioLoopMode loopMode,
+    @Default(false) isShuffled,
   }) = _SongDetailState;
 }

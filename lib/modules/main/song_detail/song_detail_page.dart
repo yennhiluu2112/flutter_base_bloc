@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/global/di/di_setup.dart';
+import 'package:flutter_base_firebase/global/enum/audio_loop_mode.dart';
+import 'package:flutter_base_firebase/global/models/song/song.dart';
 import 'package:flutter_base_firebase/global/utils/duration_time.dart';
 import 'package:flutter_base_firebase/global/widgets/base_page.dart';
 import 'package:flutter_base_firebase/global/widgets/loading_overlay.dart';
@@ -12,14 +12,18 @@ import 'package:flutter_base_firebase/modules/main/song_detail/bloc/song_detail_
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 
+import 'widgets/song_info_widget.dart';
+
 @RoutePage()
 class SongDetailPage extends BasePageScreen {
   const SongDetailPage({
     super.key,
-    required this.id,
+    required this.songs,
+    this.initialIndex = 0,
   });
 
-  final String id;
+  final List<Song> songs;
+  final int initialIndex;
 
   @override
   State<SongDetailPage> createState() => _SongDetailPageState();
@@ -27,20 +31,91 @@ class SongDetailPage extends BasePageScreen {
 
 class _SongDetailPageState extends BasePageScreenState<SongDetailPage> {
   late final SongDetailBloc _songDetailBloc;
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final pageController = PageController();
   double currentPosition = 0;
+  double totalDuration = 0;
   bool playing = false;
+
   @override
   void initState() {
     _songDetailBloc = getIt<SongDetailBloc>();
-    _songDetailBloc.add(SongDetailEvent.getSingleSong(widget.id));
+    _songDetailBloc.add(SongDetailEvent.initAudioPlayer(
+      widget.songs,
+      widget.initialIndex,
+    ));
     super.initState();
+  }
+
+  void onPageChanged(int index) {
+    _songDetailBloc.add(
+      SongDetailEvent.seekAudioWithIndex(
+        Duration.zero,
+        index,
+      ),
+    );
+  }
+
+  void onChangedSlider(double value) {
+    _songDetailBloc.add(
+      SongDetailEvent.seekAudio(
+        Duration(milliseconds: value.toInt()),
+      ),
+    );
+  }
+
+  void setLoopMode() {
+    _songDetailBloc.add(
+      const SongDetailEvent.setLoopMode(),
+    );
+  }
+
+  void onSkipPrevious(SongDetailState state) {
+    pageController.jumpToPage(state.currentIndex - 1);
+    _songDetailBloc.add(
+      const SongDetailEvent.seekAudioToPrevious(),
+    );
+  }
+
+  void onSkipNext(SongDetailState state) {
+    pageController.jumpToPage(state.currentIndex + 1);
+    _songDetailBloc.add(
+      const SongDetailEvent.seekAudioToNext(),
+    );
+  }
+
+  void handlePlayPause() {
+    if (playing) {
+      _songDetailBloc.add(
+        const SongDetailEvent.pauseAudio(),
+      );
+    } else {
+      if (currentPosition == totalDuration) {
+        _songDetailBloc.add(
+          const SongDetailEvent.seekAudio(
+            Duration.zero,
+          ),
+        );
+        _songDetailBloc.add(
+          const SongDetailEvent.playAudio(),
+        );
+      } else {
+        _songDetailBloc.add(
+          const SongDetailEvent.playAudio(),
+        );
+      }
+    }
+  }
+
+  void setShuffle(SongDetailState state) {
+    _songDetailBloc.add(
+      SongDetailEvent.setShuffleModeEnabled(
+        !state.isShuffled,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final scrSize = MediaQuery.of(context).size;
-
     return BlocProvider(
       create: (_) => _songDetailBloc,
       child: MultiBlocListener(
@@ -54,26 +129,21 @@ class _SongDetailPageState extends BasePageScreenState<SongDetailPage> {
         ],
         child: BlocBuilder<SongDetailBloc, SongDetailState>(
           builder: (context, state) {
-            final totalDuration =
-                state.audioPlayer?.duration?.inMilliseconds.toDouble();
+            totalDuration =
+                state.audioPlayer?.duration?.inMilliseconds.toDouble() ?? 0;
             currentPosition =
                 state.audioPlayer?.position.inMilliseconds.toDouble() ?? 0;
 
             if (state.audioPlayer != null) {
-              state.audioPlayer?.positionStream.listen((duration) {
+              state.audioPlayer!.positionStream.listen((duration) {
                 if (mounted) {
-                  // setState(() {
-                  //   currentPosition = duration.inMilliseconds.toDouble();
-                  // });
-                  // if (duration.inMilliseconds.toDouble() == totalDuration) {
-                  //   setState(() {
-                  //     playing = false;
-                  //   });
-                  // }
+                  setState(() {
+                    currentPosition = duration.inMilliseconds.toDouble();
+                  });
                 }
               });
 
-              state.audioPlayer?.playerStateStream.listen((state) {
+              state.audioPlayer!.playerStateStream.listen((state) {
                 if (mounted) {
                   if (state.processingState == ProcessingState.completed) {
                     setState(() {
@@ -86,14 +156,18 @@ class _SongDetailPageState extends BasePageScreenState<SongDetailPage> {
                   }
                 }
               });
-            }
 
-            // state.audioPlayer?.playingStream.listen((isPlaying) {
-            //   print(isPlaying);
-            //   setState(() {
-            //     playing = isPlaying;
-            //   });
-            // });
+              state.audioPlayer!.currentIndexStream.listen((index) {
+                if (mounted) {
+                  if (state.currentIndex != index) {
+                    pageController.jumpToPage(index!);
+                    _songDetailBloc.add(
+                      SongDetailEvent.changeCurrentIndex(index),
+                    );
+                  }
+                }
+              });
+            }
 
             return LoadingOverlay(
               loading: state.isShowLoading,
@@ -101,54 +175,33 @@ class _SongDetailPageState extends BasePageScreenState<SongDetailPage> {
                 appBar: AppBar(),
                 body: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: state.audioPlayer == null || totalDuration == null
+                  child: state.audioPlayer == null || state.isShowLoading
                       ? const SizedBox()
                       : Column(
                           children: [
                             Expanded(
                               child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    if (!state.isShowLoading)
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          height: scrSize.height * 0.4,
-                                          // width: scrSize.height * 0.3,
-                                          imageUrl: state.song?.imageUrl ?? '',
-                                        ),
-                                      ),
-                                    const SizedBox(height: 32),
-                                    Text(
-                                      state.song?.name ?? '',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                    Text(
-                                      state.song?.singer ?? '',
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ],
+                                child: PageView(
+                                  physics: state.loopMode == AudioLoopMode.one
+                                      ? const NeverScrollableScrollPhysics()
+                                      : null,
+                                  controller: pageController,
+                                  onPageChanged: onPageChanged,
+                                  children: List.generate(
+                                    widget.songs.length,
+                                    (index) {
+                                      final song = widget.songs[index];
+                                      return SongInfoWidget(song: song);
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
                             Slider(
                               value: currentPosition,
-                              onChanged: (value) {
-                                _songDetailBloc.add(
-                                  SongDetailEvent.seekAudio(
-                                    Duration(milliseconds: value.toInt()),
-                                  ),
-                                );
-                              },
+                              onChanged: onChangedSlider,
                               max: max(totalDuration, currentPosition),
-                              divisions: (totalDuration.toInt()) > 0
+                              divisions: totalDuration.toInt() > 0
                                   ? totalDuration.toInt()
                                   : 1,
                             ),
@@ -157,14 +210,17 @@ class _SongDetailPageState extends BasePageScreenState<SongDetailPage> {
                               children: [
                                 Text(
                                   DurationTime.totalDurationFormat(
-                                    state.audioPlayer!.position,
+                                    Duration(
+                                      milliseconds: currentPosition.toInt(),
+                                    ),
                                   ),
                                   style: const TextStyle(fontSize: 12),
                                 ),
                                 Text(
                                   DurationTime.totalDurationFormat(
-                                    state.audioPlayer!.duration ??
-                                        Duration.zero,
+                                    Duration(
+                                      milliseconds: totalDuration.toInt(),
+                                    ),
                                   ),
                                   style: const TextStyle(fontSize: 12),
                                 )
@@ -175,47 +231,26 @@ class _SongDetailPageState extends BasePageScreenState<SongDetailPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.loop),
+                                  onPressed: setLoopMode,
+                                  icon: Icon(state.loopMode.icon()),
                                 ),
                                 const Spacer(),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () => onSkipPrevious(state),
                                   icon: const Icon(
                                     Icons.skip_previous,
                                     size: 30,
                                   ),
                                 ),
                                 IconButton(
-                                  onPressed: () {
-                                    if (playing) {
-                                      _songDetailBloc.add(
-                                        const SongDetailEvent.pauseAudio(),
-                                      );
-                                    } else {
-                                      if (currentPosition == totalDuration) {
-                                        _songDetailBloc.add(
-                                          const SongDetailEvent.seekAudio(
-                                            Duration.zero,
-                                          ),
-                                        );
-                                        _songDetailBloc.add(
-                                          const SongDetailEvent.playAudio(),
-                                        );
-                                      } else {
-                                        _songDetailBloc.add(
-                                          const SongDetailEvent.playAudio(),
-                                        );
-                                      }
-                                    }
-                                  },
+                                  onPressed: handlePlayPause,
                                   icon: Icon(
                                     playing ? Icons.pause : Icons.play_circle,
                                     size: 50,
                                   ),
                                 ),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () => onSkipNext(state),
                                   icon: const Icon(
                                     Icons.skip_next,
                                     size: 30,
@@ -223,8 +258,12 @@ class _SongDetailPageState extends BasePageScreenState<SongDetailPage> {
                                 ),
                                 const Spacer(),
                                 IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.shuffle),
+                                  onPressed: () => setShuffle(state),
+                                  icon: Icon(
+                                    state.isShuffled
+                                        ? Icons.shuffle_on_outlined
+                                        : Icons.shuffle,
+                                  ),
                                 ),
                               ],
                             ),

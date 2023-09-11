@@ -51,7 +51,8 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: SongDetailPage(
           key: args.key,
-          id: args.id,
+          songs: args.songs,
+          initialIndex: args.initialIndex,
         ),
       );
     },
@@ -145,13 +146,15 @@ class HomeRoute extends PageRouteInfo<void> {
 class SongDetailRoute extends PageRouteInfo<SongDetailRouteArgs> {
   SongDetailRoute({
     Key? key,
-    required String id,
+    required List<Song> songs,
+    int initialIndex = 0,
     List<PageRouteInfo>? children,
   }) : super(
           SongDetailRoute.name,
           args: SongDetailRouteArgs(
             key: key,
-            id: id,
+            songs: songs,
+            initialIndex: initialIndex,
           ),
           initialChildren: children,
         );
@@ -165,16 +168,19 @@ class SongDetailRoute extends PageRouteInfo<SongDetailRouteArgs> {
 class SongDetailRouteArgs {
   const SongDetailRouteArgs({
     this.key,
-    required this.id,
+    required this.songs,
+    this.initialIndex = 0,
   });
 
   final Key? key;
 
-  final String id;
+  final List<Song> songs;
+
+  final int initialIndex;
 
   @override
   String toString() {
-    return 'SongDetailRouteArgs{key: $key, id: $id}';
+    return 'SongDetailRouteArgs{key: $key, songs: $songs, initialIndex: $initialIndex}';
   }
 }
 

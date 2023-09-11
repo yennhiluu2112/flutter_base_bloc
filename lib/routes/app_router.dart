@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/modules/intro/intro_page.dart';
 
+import '../global/models/song/song.dart';
 import '../modules/login/login_page.dart';
 import '../modules/main/home/home_page.dart';
 import '../modules/main/main_page.dart';

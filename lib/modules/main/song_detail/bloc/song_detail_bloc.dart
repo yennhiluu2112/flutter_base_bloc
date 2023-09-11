@@ -1,3 +1,4 @@
+import 'package:flutter_base_firebase/global/enum/audio_loop_mode.dart';
 import 'package:flutter_base_firebase/services/repositories/song/song_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,13 +20,22 @@ class SongDetailBloc extends Bloc<SongDetailEvent, SongDetailState> {
       (SongDetailEvent event, Emitter<SongDetailState> emit) async {
         await event.when(
           getSingleSong: (id) => _getSingleSong(emit, id),
-          initAudioPlayer: (String path) => _initAudioPlayer(emit, path),
+          initAudioPlayer: (songs, initialIndex) =>
+              _initAudioPlayer(emit, songs, initialIndex),
           playAudio: () => _playAudio(emit),
           seekAudio: (duration) => _seekAudio(emit, duration),
           disposeAudio: () => _disposeAudio(emit),
           stopAudio: () => _stopAudio(emit),
           pauseAudio: () => _pauseAudio(emit),
           closeBloc: () => _close(emit),
+          seekAudioWithIndex: (duration, index) =>
+              _seekAudioWithIndex(emit, duration, index),
+          seekAudioToNext: () => _seekAudioToNext(emit),
+          seekAudioToPrevious: () => _seekAudioToPrevious(emit),
+          setLoopMode: () => _setLoopMode(emit),
+          setShuffleModeEnabled: (enabled) =>
+              _setShuffleModeEnabled(emit, enabled),
+          changeCurrentIndex: (index) => _changeCurrentIndex(emit, index),
         );
       },
     );
@@ -38,12 +48,12 @@ class SongDetailBloc extends Bloc<SongDetailEvent, SongDetailState> {
       result.fold(
         (error) => state.copyWith(failure: error, isShowLoading: false),
         (result) {
-          add(SongDetailEvent.initAudioPlayer(result.audioPath!));
+          // add(SongDetailEvent.initAudioPlayer(result.audioPath!));
           add(const SongDetailEvent.playAudio());
 
           return state.copyWith(
             isShowLoading: false,
-            song: result,
+            // song: result,
           );
         },
       ),
@@ -52,8 +62,17 @@ class SongDetailBloc extends Bloc<SongDetailEvent, SongDetailState> {
 
   Future<void> _initAudioPlayer(
     Emitter<SongDetailState> emit,
-    String path,
+    List<Song> songs,
+    int initialIndex,
   ) async {
+    final playlist = ConcatenatingAudioSource(
+      children: songs
+          .map(
+            (e) => AudioSource.uri(Uri.parse(e.audioPath!)),
+          )
+          .toList(),
+      useLazyPreparation: true,
+    );
     emit(
       state.copyWith(
         isShowLoading: true,
@@ -61,8 +80,13 @@ class SongDetailBloc extends Bloc<SongDetailEvent, SongDetailState> {
         audioPlayer: AudioPlayer(),
       ),
     );
-    await state.audioPlayer?.setUrl(path);
-    emit(state.copyWith(isShowLoading: false));
+    await state.audioPlayer?.setAudioSource(
+      playlist,
+      initialIndex: initialIndex,
+      initialPosition: Duration.zero,
+    );
+    add(const SongDetailEvent.playAudio());
+    emit(state.copyWith(isShowLoading: false, currentIndex: initialIndex));
   }
 
   Future<void> _playAudio(
@@ -72,12 +96,66 @@ class SongDetailBloc extends Bloc<SongDetailEvent, SongDetailState> {
     emit(state);
   }
 
+  Future<void> _setLoopMode(
+    Emitter<SongDetailState> emit,
+  ) async {
+    switch (state.loopMode) {
+      case AudioLoopMode.all:
+        await state.audioPlayer?.setLoopMode(AudioLoopMode.one.value);
+        emit(state.copyWith(loopMode: AudioLoopMode.one));
+      case AudioLoopMode.one:
+        await state.audioPlayer?.setLoopMode(AudioLoopMode.off.value);
+        emit(state.copyWith(loopMode: AudioLoopMode.off));
+      case AudioLoopMode.off:
+        await state.audioPlayer?.setLoopMode(AudioLoopMode.all.value);
+        emit(state.copyWith(loopMode: AudioLoopMode.all));
+    }
+  }
+
+  Future<void> _setShuffleModeEnabled(
+    Emitter<SongDetailState> emit,
+    bool enabled,
+  ) async {
+    await state.audioPlayer?.setShuffleModeEnabled(enabled);
+    emit(state.copyWith(isShuffled: enabled));
+  }
+
   Future<void> _seekAudio(
     Emitter<SongDetailState> emit,
     Duration duration,
   ) async {
     await state.audioPlayer?.seek(duration);
     emit(state);
+  }
+
+  Future<void> _seekAudioWithIndex(
+    Emitter<SongDetailState> emit,
+    Duration duration,
+    int index,
+  ) async {
+    await state.audioPlayer?.seek(duration, index: index);
+    emit(state.copyWith(currentIndex: index));
+  }
+
+  Future<void> _seekAudioToNext(
+    Emitter<SongDetailState> emit,
+  ) async {
+    await state.audioPlayer?.seekToNext();
+    emit(state.copyWith(currentIndex: state.audioPlayer?.currentIndex ?? 0));
+  }
+
+  Future<void> _seekAudioToPrevious(
+    Emitter<SongDetailState> emit,
+  ) async {
+    await state.audioPlayer?.seekToPrevious();
+    emit(state.copyWith(currentIndex: state.audioPlayer?.currentIndex ?? 0));
+  }
+
+  Future<void> _changeCurrentIndex(
+    Emitter<SongDetailState> emit,
+    int index,
+  ) async {
+    emit(state.copyWith(currentIndex: index));
   }
 
   Future<void> _disposeAudio(
