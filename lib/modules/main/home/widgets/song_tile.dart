@@ -18,7 +18,7 @@ class SongTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           child: CachedNetworkImage(
             imageUrl: song.imageUrl ?? '',
-            width: 70,
+            width: 90,
             height: 70,
             fit: BoxFit.cover,
           ),

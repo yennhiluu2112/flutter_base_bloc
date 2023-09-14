@@ -12,6 +12,7 @@ import 'package:flutter_base_firebase/modules/main/song_detail/bloc/song_detail_
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 
+import 'widgets/lyric_bottom_sheet.dart';
 import 'widgets/song_info_widget.dart';
 
 @RoutePage()
@@ -169,107 +170,114 @@ class _SongDetailPageState extends BasePageScreenState<SongDetailPage> {
               });
             }
 
+            if (state.audioPlayer == null) {
+              return const SizedBox();
+            }
+
             return LoadingOverlay(
               loading: state.isShowLoading,
               child: Scaffold(
                 appBar: AppBar(),
                 body: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: state.audioPlayer == null || state.isShowLoading
-                      ? const SizedBox()
-                      : Column(
-                          children: [
-                            Expanded(
-                              child: Center(
-                                child: PageView(
-                                  physics: state.loopMode == AudioLoopMode.one
-                                      ? const NeverScrollableScrollPhysics()
-                                      : null,
-                                  controller: pageController,
-                                  onPageChanged: onPageChanged,
-                                  children: List.generate(
-                                    widget.songs.length,
-                                    (index) {
-                                      final song = widget.songs[index];
-                                      return SongInfoWidget(song: song);
-                                    },
-                                  ),
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: PageView(
+                                physics: state.loopMode == AudioLoopMode.one
+                                    ? const NeverScrollableScrollPhysics()
+                                    : null,
+                                controller: pageController,
+                                onPageChanged: onPageChanged,
+                                children: List.generate(
+                                  widget.songs.length,
+                                  (index) {
+                                    final song = widget.songs[index];
+                                    return SongInfoWidget(song: song);
+                                  },
                                 ),
                               ),
                             ),
-                            Slider(
-                              value: currentPosition,
-                              onChanged: onChangedSlider,
-                              max: max(totalDuration, currentPosition),
-                              divisions: totalDuration.toInt() > 0
-                                  ? totalDuration.toInt()
-                                  : 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  DurationTime.totalDurationFormat(
-                                    Duration(
-                                      milliseconds: currentPosition.toInt(),
-                                    ),
-                                  ),
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                Text(
-                                  DurationTime.totalDurationFormat(
-                                    Duration(
-                                      milliseconds: totalDuration.toInt(),
-                                    ),
-                                  ),
-                                  style: const TextStyle(fontSize: 12),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  onPressed: setLoopMode,
-                                  icon: Icon(state.loopMode.icon()),
-                                ),
-                                const Spacer(),
-                                IconButton(
-                                  onPressed: () => onSkipPrevious(state),
-                                  icon: const Icon(
-                                    Icons.skip_previous,
-                                    size: 30,
+                          ),
+                          Slider(
+                            value: currentPosition,
+                            onChanged: onChangedSlider,
+                            max: max(totalDuration, currentPosition),
+                            divisions: totalDuration.toInt() > 0
+                                ? totalDuration.toInt()
+                                : 1,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                DurationTime.totalDurationFormat(
+                                  Duration(
+                                    milliseconds: currentPosition.toInt(),
                                   ),
                                 ),
-                                IconButton(
-                                  onPressed: handlePlayPause,
-                                  icon: Icon(
-                                    playing ? Icons.pause : Icons.play_circle,
-                                    size: 50,
+                                style: const TextStyle(fontSize: 12),
+                              ),
+                              Text(
+                                DurationTime.totalDurationFormat(
+                                  Duration(
+                                    milliseconds: totalDuration.toInt(),
                                   ),
                                 ),
-                                IconButton(
-                                  onPressed: () => onSkipNext(state),
-                                  icon: const Icon(
-                                    Icons.skip_next,
-                                    size: 30,
-                                  ),
+                                style: const TextStyle(fontSize: 12),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: setLoopMode,
+                                icon: Icon(state.loopMode.icon()),
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                onPressed: () => onSkipPrevious(state),
+                                icon: const Icon(
+                                  Icons.skip_previous,
+                                  size: 30,
                                 ),
-                                const Spacer(),
-                                IconButton(
-                                  onPressed: () => setShuffle(state),
-                                  icon: Icon(
-                                    state.isShuffled
-                                        ? Icons.shuffle_on_outlined
-                                        : Icons.shuffle,
-                                  ),
+                              ),
+                              IconButton(
+                                onPressed: handlePlayPause,
+                                icon: Icon(
+                                  playing ? Icons.pause : Icons.play_circle,
+                                  size: 50,
                                 ),
-                              ],
-                            ),
-                            const SizedBox(height: 32),
-                          ],
-                        ),
+                              ),
+                              IconButton(
+                                onPressed: () => onSkipNext(state),
+                                icon: const Icon(
+                                  Icons.skip_next,
+                                  size: 30,
+                                ),
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                onPressed: () => setShuffle(state),
+                                icon: Icon(
+                                  state.isShuffled
+                                      ? Icons.shuffle_on_outlined
+                                      : Icons.shuffle,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 32),
+                        ],
+                      ),
+                      const LyricBottomSheet(),
+                    ],
+                  ),
                 ),
               ),
             );
