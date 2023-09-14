@@ -56,6 +56,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    SingerDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<SingerDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SingerDetailPage(
+          id: args.id,
+          key: args.key,
+        ),
+      );
+    },
     SignUpRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -181,6 +191,44 @@ class SongDetailRouteArgs {
   @override
   String toString() {
     return 'SongDetailRouteArgs{key: $key, songs: $songs, initialIndex: $initialIndex}';
+  }
+}
+
+/// generated route for
+/// [SingerDetailPage]
+class SingerDetailRoute extends PageRouteInfo<SingerDetailRouteArgs> {
+  SingerDetailRoute({
+    required String id,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SingerDetailRoute.name,
+          args: SingerDetailRouteArgs(
+            id: id,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SingerDetailRoute';
+
+  static const PageInfo<SingerDetailRouteArgs> page =
+      PageInfo<SingerDetailRouteArgs>(name);
+}
+
+class SingerDetailRouteArgs {
+  const SingerDetailRouteArgs({
+    required this.id,
+    this.key,
+  });
+
+  final String id;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SingerDetailRouteArgs{id: $id, key: $key}';
   }
 }
 

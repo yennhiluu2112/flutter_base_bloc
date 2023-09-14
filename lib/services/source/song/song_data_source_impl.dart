@@ -20,4 +20,12 @@ class SongRemoteDataSourceImpl implements SongRemoteDataSource {
         await firestore.collection('songs').withSongConverter().doc(id).get();
     return snapshot.data()!;
   }
+
+  @override
+  Query<Song> getSongsOfSinger(String id) {
+    return firestore
+        .collection('songs')
+        .withSongConverter()
+        .where('idSinger', isEqualTo: id);
+  }
 }

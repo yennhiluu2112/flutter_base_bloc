@@ -46,8 +46,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/intro3.png
   AssetGenImage get intro3 => const AssetGenImage('assets/images/intro3.png');
 
+  /// File path: assets/images/slide1.png
+  AssetGenImage get slide1 => const AssetGenImage('assets/images/slide1.png');
+
+  /// File path: assets/images/slide2.png
+  AssetGenImage get slide2 => const AssetGenImage('assets/images/slide2.png');
+
+  /// File path: assets/images/slide3.png
+  AssetGenImage get slide3 => const AssetGenImage('assets/images/slide3.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [intro1, intro2, intro3];
+  List<AssetGenImage> get values =>
+      [intro1, intro2, intro3, slide1, slide2, slide3];
 }
 
 class $AssetsTranslationsGen {

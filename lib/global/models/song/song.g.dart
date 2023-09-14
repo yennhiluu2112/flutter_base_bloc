@@ -9,15 +9,21 @@ part of 'song.dart';
 _$_Song _$$_SongFromJson(Map<String, dynamic> json) => _$_Song(
       id: json['id'] as String?,
       name: json['name'] as String?,
-      singer: json['singer'] as String?,
+      idSinger: json['idSinger'] as String?,
       audioPath: json['audioPath'] as String?,
       imageUrl: json['imageUrl'] as String?,
+      singerName: json['singerName'] as String?,
+      singer: json['singer'] == null
+          ? null
+          : Singer.fromJson(json['singer'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_SongToJson(_$_Song instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'singer': instance.singer,
+      'idSinger': instance.idSinger,
       'audioPath': instance.audioPath,
       'imageUrl': instance.imageUrl,
+      'singerName': instance.singerName,
+      'singer': instance.singer,
     };

@@ -22,9 +22,11 @@ Song _$SongFromJson(Map<String, dynamic> json) {
 mixin _$Song {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get singer => throw _privateConstructorUsedError;
+  String? get idSinger => throw _privateConstructorUsedError;
   String? get audioPath => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
+  String? get singerName => throw _privateConstructorUsedError;
+  Singer? get singer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,9 +41,13 @@ abstract class $SongCopyWith<$Res> {
   $Res call(
       {String? id,
       String? name,
-      String? singer,
+      String? idSinger,
       String? audioPath,
-      String? imageUrl});
+      String? imageUrl,
+      String? singerName,
+      Singer? singer});
+
+  $SingerCopyWith<$Res>? get singer;
 }
 
 /// @nodoc
@@ -59,9 +65,11 @@ class _$SongCopyWithImpl<$Res, $Val extends Song>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? singer = freezed,
+    Object? idSinger = freezed,
     Object? audioPath = freezed,
     Object? imageUrl = freezed,
+    Object? singerName = freezed,
+    Object? singer = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -72,9 +80,9 @@ class _$SongCopyWithImpl<$Res, $Val extends Song>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      singer: freezed == singer
-          ? _value.singer
-          : singer // ignore: cast_nullable_to_non_nullable
+      idSinger: freezed == idSinger
+          ? _value.idSinger
+          : idSinger // ignore: cast_nullable_to_non_nullable
               as String?,
       audioPath: freezed == audioPath
           ? _value.audioPath
@@ -84,7 +92,27 @@ class _$SongCopyWithImpl<$Res, $Val extends Song>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      singerName: freezed == singerName
+          ? _value.singerName
+          : singerName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      singer: freezed == singer
+          ? _value.singer
+          : singer // ignore: cast_nullable_to_non_nullable
+              as Singer?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SingerCopyWith<$Res>? get singer {
+    if (_value.singer == null) {
+      return null;
+    }
+
+    return $SingerCopyWith<$Res>(_value.singer!, (value) {
+      return _then(_value.copyWith(singer: value) as $Val);
+    });
   }
 }
 
@@ -97,9 +125,14 @@ abstract class _$$_SongCopyWith<$Res> implements $SongCopyWith<$Res> {
   $Res call(
       {String? id,
       String? name,
-      String? singer,
+      String? idSinger,
       String? audioPath,
-      String? imageUrl});
+      String? imageUrl,
+      String? singerName,
+      Singer? singer});
+
+  @override
+  $SingerCopyWith<$Res>? get singer;
 }
 
 /// @nodoc
@@ -113,9 +146,11 @@ class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? singer = freezed,
+    Object? idSinger = freezed,
     Object? audioPath = freezed,
     Object? imageUrl = freezed,
+    Object? singerName = freezed,
+    Object? singer = freezed,
   }) {
     return _then(_$_Song(
       id: freezed == id
@@ -126,9 +161,9 @@ class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      singer: freezed == singer
-          ? _value.singer
-          : singer // ignore: cast_nullable_to_non_nullable
+      idSinger: freezed == idSinger
+          ? _value.idSinger
+          : idSinger // ignore: cast_nullable_to_non_nullable
               as String?,
       audioPath: freezed == audioPath
           ? _value.audioPath
@@ -138,6 +173,14 @@ class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      singerName: freezed == singerName
+          ? _value.singerName
+          : singerName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      singer: freezed == singer
+          ? _value.singer
+          : singer // ignore: cast_nullable_to_non_nullable
+              as Singer?,
     ));
   }
 }
@@ -145,7 +188,14 @@ class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song>
 /// @nodoc
 @JsonSerializable()
 class _$_Song implements _Song {
-  _$_Song({this.id, this.name, this.singer, this.audioPath, this.imageUrl});
+  _$_Song(
+      {this.id,
+      this.name,
+      this.idSinger,
+      this.audioPath,
+      this.imageUrl,
+      this.singerName,
+      this.singer});
 
   factory _$_Song.fromJson(Map<String, dynamic> json) => _$$_SongFromJson(json);
 
@@ -154,15 +204,19 @@ class _$_Song implements _Song {
   @override
   final String? name;
   @override
-  final String? singer;
+  final String? idSinger;
   @override
   final String? audioPath;
   @override
   final String? imageUrl;
+  @override
+  final String? singerName;
+  @override
+  final Singer? singer;
 
   @override
   String toString() {
-    return 'Song(id: $id, name: $name, singer: $singer, audioPath: $audioPath, imageUrl: $imageUrl)';
+    return 'Song(id: $id, name: $name, idSinger: $idSinger, audioPath: $audioPath, imageUrl: $imageUrl, singerName: $singerName, singer: $singer)';
   }
 
   @override
@@ -172,17 +226,21 @@ class _$_Song implements _Song {
             other is _$_Song &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.singer, singer) || other.singer == singer) &&
+            (identical(other.idSinger, idSinger) ||
+                other.idSinger == idSinger) &&
             (identical(other.audioPath, audioPath) ||
                 other.audioPath == audioPath) &&
             (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+                other.imageUrl == imageUrl) &&
+            (identical(other.singerName, singerName) ||
+                other.singerName == singerName) &&
+            (identical(other.singer, singer) || other.singer == singer));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, singer, audioPath, imageUrl);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, idSinger, audioPath, imageUrl, singerName, singer);
 
   @JsonKey(ignore: true)
   @override
@@ -202,9 +260,11 @@ abstract class _Song implements Song {
   factory _Song(
       {final String? id,
       final String? name,
-      final String? singer,
+      final String? idSinger,
       final String? audioPath,
-      final String? imageUrl}) = _$_Song;
+      final String? imageUrl,
+      final String? singerName,
+      final Singer? singer}) = _$_Song;
 
   factory _Song.fromJson(Map<String, dynamic> json) = _$_Song.fromJson;
 
@@ -213,11 +273,15 @@ abstract class _Song implements Song {
   @override
   String? get name;
   @override
-  String? get singer;
+  String? get idSinger;
   @override
   String? get audioPath;
   @override
   String? get imageUrl;
+  @override
+  String? get singerName;
+  @override
+  Singer? get singer;
   @override
   @JsonKey(ignore: true)
   _$$_SongCopyWith<_$_Song> get copyWith => throw _privateConstructorUsedError;

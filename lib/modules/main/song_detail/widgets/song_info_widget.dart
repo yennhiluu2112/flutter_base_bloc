@@ -35,7 +35,7 @@ class SongInfoWidget extends StatelessWidget {
           ),
         ),
         Text(
-          song.singer ?? '',
+          song.singerName ?? '',
           style: const TextStyle(
             fontSize: 18,
           ),

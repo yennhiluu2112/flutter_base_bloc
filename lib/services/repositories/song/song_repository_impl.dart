@@ -31,4 +31,14 @@ class SongRepositoryImpl implements SongRepository {
       return left(const Failure.unknown());
     }
   }
+
+  @override
+  Either<Failure, Query<Song>> getSongsOfSinger(String idSinger) {
+    try {
+      final result = _remoteDataSource.getSongsOfSinger(idSinger);
+      return right(result);
+    } catch (e) {
+      return left(const Failure.unknown());
+    }
+  }
 }
