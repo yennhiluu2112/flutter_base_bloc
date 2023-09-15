@@ -1,11 +1,17 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/global/di/di_setup.dart';
 import 'package:flutter_base_firebase/global/widgets/base_page.dart';
+import 'package:flutter_base_firebase/global/widgets/label.dart';
 import 'package:flutter_base_firebase/global/widgets/loading_overlay.dart';
 import 'package:flutter_base_firebase/modules/main/settings/bloc/settings_bloc.dart';
+import 'package:flutter_base_firebase/modules/main/settings/widgets/settings_tile.dart';
 import 'package:flutter_base_firebase/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../global/enum/app_locale.dart';
+import '../../../global/providers/app_settings_provider.dart';
 
 @RoutePage()
 class SettingsPage extends BasePageScreen {
@@ -26,6 +32,8 @@ class _SettingsPageState extends BasePageScreenState<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appSettingProvider = context.read<AppSettingsProvider>();
+
     return BlocProvider(
       create: (_) => _settingsBloc,
       child: MultiBlocListener(
@@ -49,20 +57,48 @@ class _SettingsPageState extends BasePageScreenState<SettingsPage> {
               loading: state.isShowLoading,
               child: Scaffold(
                 appBar: AppBar(
-                  title: const Text('Settings'),
+                  title: Text('Settings.Title'.tr()),
                 ),
-                body: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          _settingsBloc.add(const SettingsEvent.signOut());
-                        },
-                        child: const Text('Log out'),
-                      )
-                    ],
-                  ),
+                body: ListView(
+                  padding: const EdgeInsets.all(16),
+                  children: [
+                    Label('Settings.AboutApp'.tr()),
+                    SettingsTile(
+                      icon: Icons.language,
+                      title: 'Settings.ChangeLanguage'.tr(),
+                      onTap: () {
+                        bool isEnUs = appSettingProvider.appSettings.locale ==
+                            AppLocale.enUs;
+                        appSettingProvider.changeLocale(
+                          isEnUs ? AppLocale.viVN : AppLocale.enUs,
+                          context,
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    SettingsTile(
+                      icon: Icons.light_mode_outlined,
+                      title: 'Settings.ChangeTheme'.tr(),
+                      onTap: () {},
+                    ),
+                    const Divider(),
+                    Label('Settings.Account'.tr()),
+                    SettingsTile(
+                      icon: Icons.account_circle_outlined,
+                      title: 'Settings.Profile'.tr(),
+                      onTap: () {
+                        context.router.push(const ProfileRoute());
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    SettingsTile(
+                      icon: Icons.logout,
+                      title: 'Settings.LogOut'.tr(),
+                      onTap: () {
+                        _settingsBloc.add(const SettingsEvent.signOut());
+                      },
+                    )
+                  ],
                 ),
               ),
             );

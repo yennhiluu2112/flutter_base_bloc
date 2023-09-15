@@ -33,4 +33,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> signOut() async {
     await auth.signOut();
   }
+
+  @override
+  User? getUser() {
+    return auth.currentUser;
+  }
+
+  @override
+  Future<void> updateUser({
+    String? photoUrl,
+    String? displayName,
+  }) async {
+    await auth.currentUser?.updateDisplayName(displayName);
+    await auth.currentUser?.updatePhotoURL(photoUrl);
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/global/models/request/login_request/login_request.dart';
 import 'package:flutter_base_firebase/global/widgets/label.dart';
@@ -72,36 +73,39 @@ class _LoginPageState extends BasePageScreenState<LoginPage> {
               loading: state.isShowLoading,
               child: Scaffold(
                 appBar: AppBar(
-                  title: const Text('Login'),
+                  title: Text('Login.Title'.tr()),
                 ),
                 body: FormBuilder(
                   key: _formKey,
                   child: ListView(
                     padding: const EdgeInsets.all(16),
                     children: [
-                      const Label('Email'),
+                      Label('Login.Email'.tr()),
                       FormBuilderTextField(
                         name: 'email',
-                        decoration: const InputDecoration(
-                          hintText: 'Enter your email',
+                        decoration: InputDecoration(
+                          hintText: 'Login.EmailHint'.tr(),
                         ),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: FormBuilderValidators.compose(
                           [
+                            FormBuilderValidators.email(
+                              errorText: 'Login.EmailInvalid'.tr(),
+                            ),
                             FormBuilderValidators.required(
-                              errorText: 'Email is required!',
+                              errorText: 'Login.EmailRequired'.tr(),
                             )
                           ],
                         ),
                       ),
-                      const Label('Password'),
+                      Label('Login.Password'.tr()),
                       FormBuilderTextField(
                         name: 'password',
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         obscureText: passwordObscure,
                         obscuringCharacter: '*',
                         decoration: InputDecoration(
-                          hintText: 'Enter your password',
+                          hintText: 'Login.PasswordHint'.tr(),
                           suffixIcon: SizedBox.square(
                             dimension: 40,
                             child: IconButton(
@@ -123,7 +127,7 @@ class _LoginPageState extends BasePageScreenState<LoginPage> {
                         validator: FormBuilderValidators.compose(
                           [
                             FormBuilderValidators.required(
-                              errorText: 'Password is required!',
+                              errorText: 'Login.PasswordRequired'.tr(),
                             )
                           ],
                         ),
@@ -131,14 +135,14 @@ class _LoginPageState extends BasePageScreenState<LoginPage> {
                       const SizedBox(height: 18),
                       ElevatedButton(
                         onPressed: login,
-                        child: const Text('Login'),
+                        child: Text('Login.Title'.tr()),
                       ),
                       const SizedBox(height: 18),
                       OutlinedButton(
                         onPressed: () {
                           context.router.push(const SignUpRoute());
                         },
-                        child: const Text('Sign Up'),
+                        child: Text('Signup.Title'.tr()),
                       ),
                     ],
                   ),

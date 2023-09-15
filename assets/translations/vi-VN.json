@@ -2,6 +2,10 @@
     "Common": {
         "Welcome": "Xin chào"
     },
+    "Main": {
+        "Home": "Trang chủ",
+        "Settings": "Cài đặt"
+    },
     "Intro": {
         "Title": [
             "Play The Beat",
@@ -13,5 +17,36 @@
             "In our daily lives, we often rush tasks trying to get them finish",
             "You are not alone. You have unique ability to go to another"
         ]
+    },
+    "Login": {
+        "Title": "Đăng nhập",
+        "Email": "Email",
+        "EmailHint": "Nhập email",
+        "EmailRequired": "Bạn chưa nhập email",
+        "Password": "Mật khẩu",
+        "PasswordRequired": "Bạn chưa nhập mật khẩu ",
+        "PasswordHint": "Nhập mật khẩu",
+        "EmailInvalid": "Vui lòng nhập đúng email"
+    },
+    "Signup": {
+        "Title": "Đăng ký",
+        "ConfirmPassword": "Xác nhận mật khẩu",
+        "ConfirmPasswordHint": "Nhập lại mật khẩu",
+        "ConfirmPasswordRequired": "Bạn chưa xác nhận mật khẩu",
+        "PasswordNotMatch": "Mật khẩu không khớp"
+    },
+    "Settings": {
+        "Title": "Cài đặt",
+        "AboutApp": "Về ứng dụng",
+        "ChangeLanguage": "Ngôn ngữ",
+        "ChangeTheme": "Chế độ sáng/tối",
+        "Account": "Tài khoản",
+        "LogOut": "Đăng xuất",
+        "Profile": "Thông tin cá nhân"
+    },
+    "Home": {
+        "Hello": "Xin chào",
+        "Singers": "Ca sĩ",
+        "Songs": "Nhạc"
     }
 }

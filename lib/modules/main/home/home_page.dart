@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/global/widgets/base_page.dart';
@@ -52,7 +53,7 @@ class _HomePageState extends BasePageScreenState<HomePage> {
               loading: state.isShowLoading,
               child: Scaffold(
                 appBar: AppBar(
-                  title: const Text('Hello'),
+                  title: Text('Home.Hello'.tr()),
                   centerTitle: false,
                 ),
                 body: state.songRef == null || state.singerRef == null
@@ -61,7 +62,7 @@ class _HomePageState extends BasePageScreenState<HomePage> {
                         padding: const EdgeInsets.all(16),
                         children: [
                           const ImageSlideShow(),
-                          const Label('Singers'),
+                          Label('Home.Singers'.tr()),
                           SizedBox(
                             height: 100,
                             child: FirestoreQueryBuilder(
@@ -87,7 +88,7 @@ class _HomePageState extends BasePageScreenState<HomePage> {
                               },
                             ),
                           ),
-                          const Label('Songs'),
+                          Label('Home.Songs'.tr()),
                           FirestoreQueryBuilder(
                             query: state.songRef!,
                             builder: (context, snapshot, child) {

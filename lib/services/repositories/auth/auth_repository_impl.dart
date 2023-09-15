@@ -50,4 +50,21 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(const Failure.unknown());
     }
   }
+
+  @override
+  Either<Failure, User?> getUser() {
+    try {
+      return right(_remoteDataSource.getUser());
+    } on FirebaseException catch (e) {
+      return left(Failure.firebase(e));
+    } catch (e) {
+      return left(const Failure.unknown());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateUser({String? photoUrl}) {
+    // TODO: implement updateUser
+    throw UnimplementedError();
+  }
 }

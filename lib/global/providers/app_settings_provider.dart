@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/global/enum/app_locale.dart';
 import 'package:flutter_base_firebase/global/enum/app_theme.dart';
@@ -23,9 +24,12 @@ class AppSettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeLocale(AppLocale locale) {
+  void changeLocale(AppLocale locale, BuildContext context) {
     _hiveService.saveLocale(locale);
     appSettings = _hiveService.getAppSettings();
+    if (context.mounted) {
+      context.setLocale(locale.toLocale());
+    }
     notifyListeners();
   }
 

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/global/themes/app_colors.dart';
 import 'package:flutter_base_firebase/routes/app_router.dart';
@@ -36,16 +37,16 @@ class _MainPageState extends State<MainPage> {
             selectedItemColor: AppColors.primary600,
             showUnselectedLabels: true,
             type: BottomNavigationBarType.fixed,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                label: 'Home',
-                icon: Icon(Icons.home_outlined),
-                activeIcon: Icon(Icons.home),
+                label: 'Main.Home'.tr(),
+                icon: const Icon(Icons.home_outlined),
+                activeIcon: const Icon(Icons.home),
               ),
               BottomNavigationBarItem(
-                label: 'Settings',
-                icon: Icon(Icons.settings_outlined),
-                activeIcon: Icon(Icons.settings),
+                label: 'Main.Settings'.tr(),
+                icon: const Icon(Icons.settings_outlined),
+                activeIcon: const Icon(Icons.settings),
               ),
             ],
           ),

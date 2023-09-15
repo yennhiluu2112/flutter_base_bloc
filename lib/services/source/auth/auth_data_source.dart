@@ -6,4 +6,6 @@ abstract class AuthRemoteDataSource {
   Future<UserCredential> signUp(SignUpRequest signUpRequestBody);
   Future<UserCredential> login(LoginRequest loginRequestBody);
   Future<void> signOut();
+  User? getUser();
+  Future<void> updateUser({String? photoUrl, String? displayName});
 }

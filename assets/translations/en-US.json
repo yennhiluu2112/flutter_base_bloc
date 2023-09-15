@@ -2,6 +2,10 @@
     "Common": {
         "Welcome": "Welcome"
     },
+    "Main": {
+        "Home": "Home",
+        "Settings": "Settings"
+    },
     "Intro": {
         "Title": [
             "Play The Beat",
@@ -13,5 +17,36 @@
             "In our daily lives, we often rush tasks trying to get them finish",
             "You are not alone. You have unique ability to go to another"
         ]
+    },
+    "Login": {
+        "Title": "Login",
+        "Email": "Email",
+        "EmailHint": "Enter your email",
+        "EmailRequired": "Email is required",
+        "Password": "Password",
+        "PasswordRequired": "Password is required",
+        "PasswordHint": "Enter your password",
+        "EmailInvalid": "Email is invalid"
+    },
+    "Signup": {
+        "Title": "Sign Up",
+        "ConfirmPassword": "Confirm password",
+        "ConfirmPasswordHint": "Re-enter your password",
+        "ConfirmPasswordRequired": "Confirm password is required",
+        "PasswordNotMatch": "Password not match"
+    },
+    "Settings": {
+        "Title": "Settings",
+        "AboutApp": "About app",
+        "ChangeLanguage": "Change language",
+        "ChangeTheme": "Change theme",
+        "Account": "Account",
+        "LogOut": "Log out",
+        "Profile": "Profile"
+    },
+    "Home": {
+        "Hello": "Hello",
+        "Singers": "Singers",
+        "Songs": "Songs"
     }
 }

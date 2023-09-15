@@ -6,6 +6,7 @@ import '../global/models/song/song.dart';
 import '../modules/login/login_page.dart';
 import '../modules/main/home/home_page.dart';
 import '../modules/main/main_page.dart';
+import '../modules/main/profile/profile_page.dart';
 import '../modules/main/settings/settings_page.dart';
 import '../modules/main/singer_detail/singer_detail_page.dart';
 import '../modules/main/song_detail/song_detail_page.dart';
@@ -32,6 +33,7 @@ class AppRouter extends _$AppRouter {
       ),
       AutoRoute(page: SongDetailRoute.page),
       AutoRoute(page: SingerDetailRoute.page),
+      AutoRoute(page: ProfileRoute.page),
     ];
   }
 }
