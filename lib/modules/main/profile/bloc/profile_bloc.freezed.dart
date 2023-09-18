@@ -19,32 +19,38 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getUser,
+    required TResult Function(String? displayName, String? photoUrl) updateUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getUser,
+    TResult? Function(String? displayName, String? photoUrl)? updateUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getUser,
+    TResult Function(String? displayName, String? photoUrl)? updateUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserRef value) getUser,
+    required TResult Function(_UpdateUserRef value) updateUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetUserRef value)? getUser,
+    TResult? Function(_UpdateUserRef value)? updateUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserRef value)? getUser,
+    TResult Function(_UpdateUserRef value)? updateUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +113,7 @@ class _$_GetUserRef implements _GetUserRef {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getUser,
+    required TResult Function(String? displayName, String? photoUrl) updateUser,
   }) {
     return getUser();
   }
@@ -115,6 +122,7 @@ class _$_GetUserRef implements _GetUserRef {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getUser,
+    TResult? Function(String? displayName, String? photoUrl)? updateUser,
   }) {
     return getUser?.call();
   }
@@ -123,6 +131,7 @@ class _$_GetUserRef implements _GetUserRef {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getUser,
+    TResult Function(String? displayName, String? photoUrl)? updateUser,
     required TResult orElse(),
   }) {
     if (getUser != null) {
@@ -135,6 +144,7 @@ class _$_GetUserRef implements _GetUserRef {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserRef value) getUser,
+    required TResult Function(_UpdateUserRef value) updateUser,
   }) {
     return getUser(this);
   }
@@ -143,6 +153,7 @@ class _$_GetUserRef implements _GetUserRef {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetUserRef value)? getUser,
+    TResult? Function(_UpdateUserRef value)? updateUser,
   }) {
     return getUser?.call(this);
   }
@@ -151,6 +162,7 @@ class _$_GetUserRef implements _GetUserRef {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserRef value)? getUser,
+    TResult Function(_UpdateUserRef value)? updateUser,
     required TResult orElse(),
   }) {
     if (getUser != null) {
@@ -162,6 +174,151 @@ class _$_GetUserRef implements _GetUserRef {
 
 abstract class _GetUserRef implements ProfileEvent {
   const factory _GetUserRef() = _$_GetUserRef;
+}
+
+/// @nodoc
+abstract class _$$_UpdateUserRefCopyWith<$Res> {
+  factory _$$_UpdateUserRefCopyWith(
+          _$_UpdateUserRef value, $Res Function(_$_UpdateUserRef) then) =
+      __$$_UpdateUserRefCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? displayName, String? photoUrl});
+}
+
+/// @nodoc
+class __$$_UpdateUserRefCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$_UpdateUserRef>
+    implements _$$_UpdateUserRefCopyWith<$Res> {
+  __$$_UpdateUserRefCopyWithImpl(
+      _$_UpdateUserRef _value, $Res Function(_$_UpdateUserRef) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? displayName = freezed,
+    Object? photoUrl = freezed,
+  }) {
+    return _then(_$_UpdateUserRef(
+      freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateUserRef implements _UpdateUserRef {
+  const _$_UpdateUserRef(this.displayName, this.photoUrl);
+
+  @override
+  final String? displayName;
+  @override
+  final String? photoUrl;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.updateUser(displayName: $displayName, photoUrl: $photoUrl)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateUserRef &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, displayName, photoUrl);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateUserRefCopyWith<_$_UpdateUserRef> get copyWith =>
+      __$$_UpdateUserRefCopyWithImpl<_$_UpdateUserRef>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getUser,
+    required TResult Function(String? displayName, String? photoUrl) updateUser,
+  }) {
+    return updateUser(displayName, photoUrl);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getUser,
+    TResult? Function(String? displayName, String? photoUrl)? updateUser,
+  }) {
+    return updateUser?.call(displayName, photoUrl);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getUser,
+    TResult Function(String? displayName, String? photoUrl)? updateUser,
+    required TResult orElse(),
+  }) {
+    if (updateUser != null) {
+      return updateUser(displayName, photoUrl);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetUserRef value) getUser,
+    required TResult Function(_UpdateUserRef value) updateUser,
+  }) {
+    return updateUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetUserRef value)? getUser,
+    TResult? Function(_UpdateUserRef value)? updateUser,
+  }) {
+    return updateUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetUserRef value)? getUser,
+    TResult Function(_UpdateUserRef value)? updateUser,
+    required TResult orElse(),
+  }) {
+    if (updateUser != null) {
+      return updateUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateUserRef implements ProfileEvent {
+  const factory _UpdateUserRef(
+      final String? displayName, final String? photoUrl) = _$_UpdateUserRef;
+
+  String? get displayName;
+  String? get photoUrl;
+  @JsonKey(ignore: true)
+  _$$_UpdateUserRefCopyWith<_$_UpdateUserRef> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

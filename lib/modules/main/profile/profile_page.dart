@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_firebase/global/di/di_setup.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import '../../../global/widgets/label.dart';
+import 'widgets/image_picker_field.dart';
 
 @RoutePage()
 class ProfilePage extends BasePageScreen {
@@ -21,12 +21,26 @@ class ProfilePage extends BasePageScreen {
 
 class _ProfilePageState extends BasePageScreenState<ProfilePage> {
   late final ProfileBloc _profileBloc;
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   void initState() {
     _profileBloc = getIt<ProfileBloc>();
     _profileBloc.add(const ProfileEvent.getUser());
     super.initState();
+  }
+
+  void updateProfile() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    if (_formKey.currentState?.saveAndValidate() == true) {
+      final data = _formKey.currentState!.value;
+      _profileBloc.add(
+        ProfileEvent.updateUser(
+          data['displayName'],
+          data['photoUrl'],
+        ),
+      );
+    }
   }
 
   @override
@@ -62,40 +76,33 @@ class _ProfilePageState extends BasePageScreenState<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
-                        child: ListView(
-                          children: [
-                            SizedBox.square(
-                              dimension: 90,
-                              child: CircleAvatar(
-                                child: CachedNetworkImage(
-                                  imageUrl: user.photoURL ?? '',
-                                  width: 90,
-                                  height: 90,
-                                  fit: BoxFit.cover,
-                                  errorWidget: (_, __, ___) => const Icon(
-                                    Icons.account_circle,
-                                    size: 50,
-                                  ),
-                                ),
+                        child: FormBuilder(
+                          key: _formKey,
+                          child: ListView(
+                            children: [
+                              FormBuilderField(
+                                name: 'photoUrl',
+                                initialValue: user.photoURL,
+                                builder: (field) {
+                                  return ImagePickerField(
+                                    didChangeField: field.didChange,
+                                    field: field,
+                                  );
+                                },
                               ),
-                            ),
-                            Label('Login.Email'.tr()),
-                            FormBuilderTextField(
-                              name: 'email',
-                              initialValue: user.email,
-                              enabled: false,
-                            ),
-                            const Label('Name'),
-                            FormBuilderTextField(
-                              name: 'displayName',
-                              initialValue: user.displayName,
-                            ),
-                            const Label('Phone Number'),
-                            FormBuilderTextField(
-                              name: 'phoneNumber',
-                              initialValue: user.phoneNumber,
-                            ),
-                          ],
+                              Label('Login.Email'.tr()),
+                              FormBuilderTextField(
+                                name: 'email',
+                                initialValue: user.email,
+                                enabled: false,
+                              ),
+                              const Label('Name'),
+                              FormBuilderTextField(
+                                name: 'displayName',
+                                initialValue: user.displayName,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       ElevatedButton(

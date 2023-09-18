@@ -63,8 +63,20 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> updateUser({String? photoUrl}) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> updateUser({
+    String? displayName,
+    String? photoUrl,
+  }) async {
+    try {
+      await _remoteDataSource.updateUser(
+        photoUrl: photoUrl,
+        displayName: displayName,
+      );
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(Failure.firebase(e));
+    } catch (e) {
+      return left(const Failure.unknown());
+    }
   }
 }

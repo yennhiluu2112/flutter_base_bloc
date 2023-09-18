@@ -13,7 +13,8 @@ abstract class AuthRepository {
   Future<Either<Failure, UserCredential>> login(LoginRequest loginRequestBody);
   Future<Either<Failure, void>> signOut();
   Either<Failure, User?> getUser();
-  Future<Either<Failure, void>> updateUser({
+  Future<Either<Failure, Unit>> updateUser({
+    String? displayName,
     String? photoUrl,
   });
 }

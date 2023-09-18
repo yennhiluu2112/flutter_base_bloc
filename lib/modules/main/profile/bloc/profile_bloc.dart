@@ -17,8 +17,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this._authRepository) : super(const ProfileState()) {
     on(
       (ProfileEvent event, Emitter<ProfileState> emit) async {
-        await event.when(
+        event.when(
           getUser: () => _getUser(emit),
+          updateUser: (displayName, photoUrl) => _updateUser(
+            emit,
+            displayName: displayName,
+            photoUrl: photoUrl,
+          ),
         );
       },
     );
@@ -36,6 +41,28 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           return state.copyWith(
             isShowLoading: false,
             user: result,
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> _updateUser(
+    Emitter<ProfileState> emit, {
+    String? displayName,
+    String? photoUrl,
+  }) async {
+    emit(state.copyWith(isShowLoading: true, failure: null));
+    final result = await _authRepository.updateUser(
+      displayName: displayName,
+      photoUrl: photoUrl,
+    );
+    emit(
+      result.fold(
+        (error) => state.copyWith(failure: error, isShowLoading: false),
+        (result) {
+          return state.copyWith(
+            isShowLoading: false,
           );
         },
       ),
