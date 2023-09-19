@@ -38,10 +38,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       result.fold(
         (error) => state.copyWith(failure: error, isShowLoading: false),
         (result) {
-          return state.copyWith(
-            isShowLoading: false,
-            user: result,
-          );
+          return state.copyWith(isShowLoading: false, user: result);
         },
       ),
     );
@@ -61,9 +58,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       result.fold(
         (error) => state.copyWith(failure: error, isShowLoading: false),
         (result) {
-          return state.copyWith(
-            isShowLoading: false,
-          );
+          return state.copyWith(isShowLoading: false);
         },
       ),
     );

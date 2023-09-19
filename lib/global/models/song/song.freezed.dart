@@ -27,6 +27,7 @@ mixin _$Song {
   String? get imageUrl => throw _privateConstructorUsedError;
   String? get singerName => throw _privateConstructorUsedError;
   Singer? get singer => throw _privateConstructorUsedError;
+  String? get lyrics => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $SongCopyWith<$Res> {
       String? audioPath,
       String? imageUrl,
       String? singerName,
-      Singer? singer});
+      Singer? singer,
+      String? lyrics});
 
   $SingerCopyWith<$Res>? get singer;
 }
@@ -70,6 +72,7 @@ class _$SongCopyWithImpl<$Res, $Val extends Song>
     Object? imageUrl = freezed,
     Object? singerName = freezed,
     Object? singer = freezed,
+    Object? lyrics = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -100,6 +103,10 @@ class _$SongCopyWithImpl<$Res, $Val extends Song>
           ? _value.singer
           : singer // ignore: cast_nullable_to_non_nullable
               as Singer?,
+      lyrics: freezed == lyrics
+          ? _value.lyrics
+          : lyrics // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -129,7 +136,8 @@ abstract class _$$_SongCopyWith<$Res> implements $SongCopyWith<$Res> {
       String? audioPath,
       String? imageUrl,
       String? singerName,
-      Singer? singer});
+      Singer? singer,
+      String? lyrics});
 
   @override
   $SingerCopyWith<$Res>? get singer;
@@ -151,6 +159,7 @@ class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song>
     Object? imageUrl = freezed,
     Object? singerName = freezed,
     Object? singer = freezed,
+    Object? lyrics = freezed,
   }) {
     return _then(_$_Song(
       id: freezed == id
@@ -181,6 +190,10 @@ class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song>
           ? _value.singer
           : singer // ignore: cast_nullable_to_non_nullable
               as Singer?,
+      lyrics: freezed == lyrics
+          ? _value.lyrics
+          : lyrics // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -195,7 +208,8 @@ class _$_Song implements _Song {
       this.audioPath,
       this.imageUrl,
       this.singerName,
-      this.singer});
+      this.singer,
+      this.lyrics});
 
   factory _$_Song.fromJson(Map<String, dynamic> json) => _$$_SongFromJson(json);
 
@@ -213,10 +227,12 @@ class _$_Song implements _Song {
   final String? singerName;
   @override
   final Singer? singer;
+  @override
+  final String? lyrics;
 
   @override
   String toString() {
-    return 'Song(id: $id, name: $name, idSinger: $idSinger, audioPath: $audioPath, imageUrl: $imageUrl, singerName: $singerName, singer: $singer)';
+    return 'Song(id: $id, name: $name, idSinger: $idSinger, audioPath: $audioPath, imageUrl: $imageUrl, singerName: $singerName, singer: $singer, lyrics: $lyrics)';
   }
 
   @override
@@ -234,13 +250,14 @@ class _$_Song implements _Song {
                 other.imageUrl == imageUrl) &&
             (identical(other.singerName, singerName) ||
                 other.singerName == singerName) &&
-            (identical(other.singer, singer) || other.singer == singer));
+            (identical(other.singer, singer) || other.singer == singer) &&
+            (identical(other.lyrics, lyrics) || other.lyrics == lyrics));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, idSinger, audioPath, imageUrl, singerName, singer);
+  int get hashCode => Object.hash(runtimeType, id, name, idSinger, audioPath,
+      imageUrl, singerName, singer, lyrics);
 
   @JsonKey(ignore: true)
   @override
@@ -264,7 +281,8 @@ abstract class _Song implements Song {
       final String? audioPath,
       final String? imageUrl,
       final String? singerName,
-      final Singer? singer}) = _$_Song;
+      final Singer? singer,
+      final String? lyrics}) = _$_Song;
 
   factory _Song.fromJson(Map<String, dynamic> json) = _$_Song.fromJson;
 
@@ -282,6 +300,8 @@ abstract class _Song implements Song {
   String? get singerName;
   @override
   Singer? get singer;
+  @override
+  String? get lyrics;
   @override
   @JsonKey(ignore: true)
   _$$_SongCopyWith<_$_Song> get copyWith => throw _privateConstructorUsedError;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_firebase/global/extensions/theme_data_extension.dart';
 
 import '../../../../global/themes/app_colors.dart';
 
@@ -47,7 +48,7 @@ class SettingsTile extends StatelessWidget {
         title,
         style: TextStyle(
           fontSize: 16,
-          color: titleColor ?? AppColors.greyG100,
+          color: titleColor ?? context.blackG50White,
         ),
       ),
       subtitle: subTitle != null

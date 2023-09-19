@@ -32,13 +32,11 @@ class _ProfilePageState extends BasePageScreenState<ProfilePage> {
 
   void updateProfile() {
     FocusManager.instance.primaryFocus?.unfocus();
+
     if (_formKey.currentState?.saveAndValidate() == true) {
       final data = _formKey.currentState!.value;
       _profileBloc.add(
-        ProfileEvent.updateUser(
-          data['displayName'],
-          data['photoUrl'],
-        ),
+        ProfileEvent.updateUser(data['displayName'], data['photoUrl']),
       );
     }
   }
@@ -106,7 +104,7 @@ class _ProfilePageState extends BasePageScreenState<ProfilePage> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: updateProfile,
                         child: const Text('Update'),
                       )
                     ],

@@ -18,6 +18,7 @@ class ImagePickerField extends StatelessWidget {
 
   final Function(String value) didChangeField;
   final FormFieldState<String> field;
+
   void uploadFile(XFile xfile) async {
     final fileName = '${DateTime.now().toString()}.png';
     final ref = FirebaseStorage.instance.ref().child(fileName);
@@ -35,16 +36,13 @@ class ImagePickerField extends StatelessWidget {
 
   static Future<XFile?> launchImagePicker(context, ImageSource source) async {
     bool isGranted = true;
+
     if (source == ImageSource.camera) {
-      isGranted = await PermissionHelper.request(
-        PermissionTarget.camera,
-        context,
-      );
+      isGranted =
+          await PermissionHelper.request(PermissionTarget.camera, context);
     } else {
-      isGranted = await PermissionHelper.request(
-        PermissionTarget.readPhoto,
-        context,
-      );
+      isGranted =
+          await PermissionHelper.request(PermissionTarget.readPhoto, context);
     }
 
     if (!isGranted) return null;
@@ -74,10 +72,7 @@ class ImagePickerField extends StatelessWidget {
     ImageSource source,
     BuildContext context,
   ) async {
-    final file = await launchImagePicker(
-      context,
-      source,
-    );
+    final file = await launchImagePicker(context, source);
     if (file != null) {
       uploadFile(file);
     }
@@ -94,16 +89,10 @@ class ImagePickerField extends StatelessWidget {
               contentText:
                   'Please chooose if you want to pick image or capture a new photo',
               onTapPositiveButton: () {
-                pickAndUploadImage(
-                  ImageSource.camera,
-                  context,
-                );
+                pickAndUploadImage(ImageSource.camera, context);
               },
               onTapNegativeButton: () {
-                pickAndUploadImage(
-                  ImageSource.gallery,
-                  context,
-                );
+                pickAndUploadImage(ImageSource.gallery, context);
               },
               positiveButtonText: 'Camera',
               negativeButtonText: 'Gallery',

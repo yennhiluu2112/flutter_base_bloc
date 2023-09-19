@@ -11,6 +11,7 @@ import 'package:flutter_base_firebase/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../global/enum/app_locale.dart';
+import '../../../global/enum/app_theme.dart';
 import '../../../global/providers/app_settings_provider.dart';
 
 @RoutePage()
@@ -79,7 +80,13 @@ class _SettingsPageState extends BasePageScreenState<SettingsPage> {
                     SettingsTile(
                       icon: Icons.light_mode_outlined,
                       title: 'Settings.ChangeTheme'.tr(),
-                      onTap: () {},
+                      onTap: () {
+                        final isLight = appSettingProvider.appSettings.theme ==
+                            AppTheme.light;
+                        appSettingProvider.changeTheme(
+                          isLight ? AppTheme.dark : AppTheme.light,
+                        );
+                      },
                     ),
                     const Divider(),
                     Label('Settings.Account'.tr()),

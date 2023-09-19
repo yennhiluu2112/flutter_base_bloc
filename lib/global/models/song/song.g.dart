@@ -16,6 +16,7 @@ _$_Song _$$_SongFromJson(Map<String, dynamic> json) => _$_Song(
       singer: json['singer'] == null
           ? null
           : Singer.fromJson(json['singer'] as Map<String, dynamic>),
+      lyrics: json['lyrics'] as String?,
     );
 
 Map<String, dynamic> _$$_SongToJson(_$_Song instance) => <String, dynamic>{
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$_SongToJson(_$_Song instance) => <String, dynamic>{
       'imageUrl': instance.imageUrl,
       'singerName': instance.singerName,
       'singer': instance.singer,
+      'lyrics': instance.lyrics,
     };

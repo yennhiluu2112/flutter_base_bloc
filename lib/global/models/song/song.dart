@@ -14,6 +14,7 @@ class Song with _$Song {
     String? imageUrl,
     String? singerName,
     Singer? singer,
+    String? lyrics,
   }) = _Song;
 
   factory Song.fromJson(Map<String, dynamic> json) => _$SongFromJson(json);

@@ -87,8 +87,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       tempList[i] = newSong!;
     }
 
-    // Future.delayed(const Duration(milliseconds: 1000), () async {});
-
     emit(
       state.copyWith(songs: tempList, isShowLoading: false),
     );

@@ -275,7 +275,11 @@ class _SongDetailPageState extends BasePageScreenState<SongDetailPage> {
                           const SizedBox(height: 32),
                         ],
                       ),
-                      const LyricBottomSheet(),
+                      LyricBottomSheet(
+                        lyrics: widget.songs[state.audioPlayer!.currentIndex!]
+                                .lyrics ??
+                            '',
+                      ),
                     ],
                   ),
                 ),

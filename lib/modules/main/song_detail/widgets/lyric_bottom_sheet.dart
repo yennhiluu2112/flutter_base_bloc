@@ -5,7 +5,10 @@ import '../../../../global/themes/app_colors.dart';
 class LyricBottomSheet extends StatelessWidget {
   const LyricBottomSheet({
     super.key,
+    required this.lyrics,
   });
+
+  final String lyrics;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +43,9 @@ class LyricBottomSheet extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'dhhdsadyhdyhuehd7uwhyd7uy7uweyhwueyduwedwuedhuweuwhuwehuwehduewhuhewuh',
+                Text(
+                  lyrics,
+                  style: const TextStyle(color: AppColors.blackG50),
                 ),
               ],
             ),
