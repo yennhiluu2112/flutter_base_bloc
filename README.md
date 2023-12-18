@@ -1,4 +1,4 @@
-# flutter_base_firebase
+# flutter_base_bloc
 
 A new Flutter project.
 
